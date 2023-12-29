@@ -1,0 +1,56 @@
+
+/* Optional: Add a background overlay */
+.modal-backdrop.show {
+    opacity: 0.6 !important;
+}
+
+/* Style the modal header */
+.modal-header {
+    background-color: #38179b;
+    color: white!important; 
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style the modal title */
+
+.modal-title {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+.modal-header{
+    font-size: 0.5rem;
+}
+.modal-header span{
+    text-align: end;
+    width: 100%;
+}
+th, td{
+    font-size: 15px;
+}
+/* Style the modal body */
+.modal-body {
+    padding: 20px;
+    letter-spacing: 1px;
+}
+
+/* Style the modal footer */
+.modal-footer {
+    border-top: 1px solid #ddd;
+    flex-direction: column;
+}
+.modal-footer button{
+    margin: 0 20px;
+    padding: 5px 25px;
+}
+
+.btn-danger{
+    background-color: rgb(195, 18, 18);
+}
+
+/* Responsive styles using media queries */
+@media (max-width: 576px) {
+    .modal-dialog {
+        max-width: 90%;
+    }
+}

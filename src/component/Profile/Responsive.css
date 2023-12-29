@@ -1,0 +1,11 @@
+
+@media only screen and (max-width: 922px) {
+  .row{
+    flex-direction: column!important;
+}
+}
+@media only screen and (max-width: 1254px) {
+  .row-outer{
+    flex-direction: column!important;
+}
+}
