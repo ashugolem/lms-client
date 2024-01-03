@@ -1,7 +1,8 @@
 const initialValue = {
     isLoggedIn: false,
     username: '',
-    role: ''
+    role: '',
+    loading: false
 };
 
 
@@ -23,6 +24,12 @@ const setLog = (state = initialValue, action) => {
             return {
                 ...state,
                 role: action.payload,
+            };
+        }
+        case "LOADING": {
+            return {
+                ...state,
+                loading: action.payload,
             };
         }
 

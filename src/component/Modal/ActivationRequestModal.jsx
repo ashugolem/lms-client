@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import './UpdateStatusModal.css';
 import UpdateUserActivation from '../API/User Activation/UpdateUserActivation';
 
-const DetailsModal = (props) => {
+const DetailsModal = ({ student, teacher, _id, showError, setStatus, onClose, show, message, name, type, isactiontaken, status }) => {
     const styles = {
         table: {
             padding: '0px',
@@ -13,28 +13,29 @@ const DetailsModal = (props) => {
             paddingRight: '0px',
         },
     };
+
     const handleReject = async () => {
-        const response = await UpdateUserActivation('Declined', props._id)
+        const response = await UpdateUserActivation('Declined', _id)
         if (response) {
-            props.showError(`${props.name} has Declined for Activation`)
-            props.setStatus("Declined")
+            showError(`${name} has Declined for Activation`)
+            setStatus("Declined")
         }
-        else props.showError('Some Error Occured')
-        props.onClose();
+        else showError('Some Error Occured')
+        onClose();
     };
 
     const handleAccept = async () => {
-        const response = await UpdateUserActivation('Approved', props._id)
+        const response = await UpdateUserActivation('Approved', _id)
         if (response) {
-            props.showSuccess(`${props.name} has Approved Successfully`)
-            props.setStatus("Approved")
+            showSuccess(`${name} has Approved Successfully`)
+            setStatus("Approved")
         }
-        else props.showError('Some Error Occured')
-        props.onClose();
+        else showError('Some Error Occured')
+        onClose();
     };
     return (
         <>
-            <Modal show={props.show} onHide={props.onClose} centered>
+            <Modal show={show} onHide={onClose} centered>
                 <Modal.Header>
                     <Modal.Title>
                         User Activation Request
@@ -42,7 +43,7 @@ const DetailsModal = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <h5 className='text-center'>
-                        <span className='text-bold'>{props.message}</span>
+                        <span className='text-bold'>{message}</span>
                     </h5>
                     <div className="table-responsive d-flex justify-content-center table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                         <table className="table border mt-3 horizontal-table" style={styles.table} id="dataTable ">
@@ -50,48 +51,48 @@ const DetailsModal = (props) => {
                                 <tr>
                                     <th>Name</th>
                                     <th>:</th>
-                                    <td>{props.name}</td>
+                                    <td>{name}</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    {props.type === 'Student' &&
+                                    {type === 'Student' &&
                                         <>
                                             <th>Admission Number</th>
                                             <th>:</th>
-                                            <td >{props.admissionNo}</td>
+                                            <td >{student.admissionNo}</td>
                                         </>
                                     }
-                                    {props.type === 'Teacher' &&
+                                    {type === 'Teacher' &&
                                         <>
                                             <th>EID</th>
                                             <th>:</th>
-                                            <td>TODO</td>
+                                            <td>{teacher.eid}</td>
                                         </>
                                     }
                                 </tr>
                                 <tr>
-                                    {props.type === 'Student' &&
+                                    {type === 'Student' &&
                                         <>
                                             <th>Stream</th>
                                             <th>:</th>
-                                            <td>{`${props.course} ${props.branch}`}</td>
+                                            <td>{`${student.course} ${student.branch}`}</td>
                                         </>
                                     }
-                                    {props.type === 'Teacher' &&
+                                    {type === 'Teacher' &&
                                         <>
                                             <th>Designation</th>
                                             <th>:</th>
-                                            <td>TODO</td>
+                                            <td>{teacher.designation}</td>
                                         </>
                                     }
                                 </tr>
                                 <tr>
-                                    {props.type === 'Student' &&
+                                    {type === 'Student' &&
                                         <>
                                             <th>Semester</th>
                                             <th>:</th>
-                                            <td>{props.semester}</td>
+                                            <td>{student.semester}</td>
                                         </>
                                     }
                                 </tr>
@@ -102,24 +103,24 @@ const DetailsModal = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     {
-                        !props.isactiontaken &&
+                        !isactiontaken &&
                         <h6 className='text-end text-warning'>Take necessary action</h6>
                     }
                     {
-                        props.isactiontaken && ((
-                            props.status === "Declined" &&
+                        isactiontaken && ((
+                            status === "Declined" &&
                             <span className="small fw-bold text-danger">Declined</span>
                         ) ||
-                            (props.status === "Approved" &&
+                            (status === "Approved" &&
                                 <span className="fw-bold">Approved</span>))
 
                     }
                     <div className="button d-flex justify-content-center">
-                        <Button variant={`${props.isactiontaken ? "primary" : "secondary"}`} onClick={props.onClose}>
+                        <Button variant={`${isactiontaken ? "primary" : "secondary"}`} onClick={onClose}>
                             Back
                         </Button>
                         {
-                            !props.isactiontaken &&
+                            !isactiontaken &&
                             <>
                                 <Button variant="primary" onClick={handleAccept}>
                                     Allow

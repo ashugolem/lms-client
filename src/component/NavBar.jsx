@@ -13,7 +13,6 @@ export const NavBar = () => {
       sidebar.classList.toggle('toggled');
 
     };
-
     sidebarToggleBtn.addEventListener('click', toggleSidebar);
 
     return () => {
@@ -22,7 +21,7 @@ export const NavBar = () => {
     };
   }, []);
   return (
-    <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <nav className="navbar toggled navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
       <div className="container-fluid d-flex flex-column p-0">
         <Link className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" to={'/'}>
           <div className="sidebar-brand-icon rotate-n-15">

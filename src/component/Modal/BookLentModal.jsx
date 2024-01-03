@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import CreateRequest from '../API/Request/CreateRequest';
 import { Toast } from 'primereact/toast';
 
-const BookLentModal = (props) => {
+const BookLentModal = ({show, code, onClose, title, author, selfNo}) => {
     const styles = {
         table: {
             padding: '0px',
@@ -17,23 +17,19 @@ const BookLentModal = (props) => {
         toastTopCenter.current.show({ severity: 'success', summary: 'Success', detail: 'Request Successfully Sent to Librarian', life: 3000 });
     }
     const handleLent = async () => {
-        console.log("From Modal : ")
-        console.log(`Book - ${props.book}`)
-        const response = await CreateRequest(props.user, props.book )
+        const response = await CreateRequest(localStorage.getItem('user-id'), props.book )
         if (response.success) {
             showSuccess()
             props.onClose();
-            // setTimeout(() => {
-            // }, 3000);
         }
     }
     return (
-        <>
+        <tr>
             <Toast ref={toastTopCenter} position="top-center" />
-            <Modal show={props.show} onHide={props.onClose} centered>
+            <Modal show={show} onHide={onClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Lent - {props.title}
+                        Lent - {title}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -50,10 +46,10 @@ const BookLentModal = (props) => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="text-center">{props.index + 5001}</td>
-                                        <td className="text-center">{props.title}</td>
-                                        <td className="text-center">{props.author}</td>
-                                        <td className="text-center">{props.selfNo}</td>
+                                        <td className="text-center">{(code).toLocaleString('en-US', { minimumIntegerDigits: 6, useGrouping: false })}</td>
+                                        <td className="text-center">{title}</td>
+                                        <td className="text-center">{author}</td>
+                                        <td className="text-center">{selfNo}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,7 +58,7 @@ const BookLentModal = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="button d-flex justify-content-center">
-                        <Button variant="secondary" onClick={props.onClose}>
+                        <Button variant="secondary" onClick={onClose}>
                             Back
                         </Button>
                         <Button variant="primary" onClick={handleLent}>
@@ -71,7 +67,7 @@ const BookLentModal = (props) => {
                     </div>
                 </Modal.Footer>
             </Modal>
-        </>
+        </tr>
     );
 };
 

@@ -9,7 +9,6 @@ const ActivationRequest = async (role) =>{
         body: JSON.stringify({  user: Decode().user.id , type: role}),
     });
     const json = await response.json();
-    console.log(json + 'I am ffrom CreationRequest')
     if (json.success) {
         return true
     }

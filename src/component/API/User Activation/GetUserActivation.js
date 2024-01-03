@@ -13,5 +13,5 @@ const AllActivationRequests = async () => {
         console.log(error.message)
     }
 }
-export default AllActivationRequests;
+export default AllActivationRequests; 
 

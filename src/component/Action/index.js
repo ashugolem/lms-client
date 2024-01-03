@@ -18,3 +18,9 @@ export const setUserName = (username) => {
         payload: username
     }
 }
+export const setLoading = (loading) => {
+    return {
+        type: "LOADING",
+        payload: loading
+    }
+}

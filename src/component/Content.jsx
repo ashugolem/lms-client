@@ -8,8 +8,10 @@ import AllUser from './API/AllUsers/AllUsers'
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { Avatar } from 'primereact/avatar';
 import { Toast } from 'primereact/toast';
+import FineSettings from './FineSettings'
 
 const Content = () => {
+  document.title = "LMS - Admin"
   const role = useSelector((state) => state.setLog.role)
   const [users, setUsers] = useState([])
   const getAllUsers = async () => {
@@ -124,9 +126,9 @@ const Content = () => {
                   </div>
                   <div className="col-md-5">
                     <div className="card card-status shadow mb-4" style={{ height: '95%' }}>
-                      <div className="card-header fw-bold text-primary font-weight-bold">Monthly Fine Stats</div>
+                      <div className="card-header fw-bold text-primary font-weight-bold">Fine Settings</div>
                       <div className="container" >
-                        <ChartComponent type={false} />
+                        <FineSettings />
                       </div>
                     </div>
                   </div>
@@ -141,7 +143,6 @@ const Content = () => {
                           <h6 className="fw-bold text-start my-auto text-muted text-larger">Total - {users.length}</h6>
                         </div>
                         <div className="btn btn-primary d-flex align-items-center fw-bold text-white"> <i class="fa-solid fa-user-plus"></i> </div>
-                        {/* <SpeedDial model={items} radius={80} type="semi-circle" direction="left" style={{ top: 'calc(50% - 2rem)', left: 0 }} /> */}
                       </div>
                       <ScrollPanel style={{ width: '100%', height: '350px' }} >
                         <table className="align-middle table my-0" style={styles.table} id="dataTable">
@@ -174,7 +175,7 @@ const Content = () => {
                                               <i className="fas text-white fa-pencil " ></i>
                                             </div>
                                             <div className="btn ms-3">
-                                              <i className="fa-solid text-danger fa-trash" ></i>
+                                              <i className="fa-solid text-danger  fa-trash" ></i>
                                             </div>
                                           
                                         </>

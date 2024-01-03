@@ -15,6 +15,8 @@ import { PrimeReactProvider } from 'primereact/api';
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Profile from './component/Profile/Profile';
+import { CookiesProvider } from 'react-cookie';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   useEffect(() => {
@@ -22,30 +24,43 @@ function App() {
       duration: 1000,
     });
   }, []);
+
   return (
     <>
       <ScrollTrigger>
+        <CookiesProvider>
+          <PrimeReactProvider value={{ styled: false }}>
 
-        <PrimeReactProvider value={{styled: false}}>
+            <div id="wrapper">
+              <NavBar />
+              <Routes>
+                <Route exact path="/register" element={<Signup />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/add-book" element={<AddBooks />} />
+                {/* Protected Routes */}
+                <Route exact path="/admin" element={
+                  <ProtectedRoute roles={['Admin']}>
+                    <Content />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/books" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <Table />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/profile" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/pending" element={<Pending />} />
+                <Route exact path="/blocked" element={<Blocked />} />
+              </Routes>
+            </div>
 
-          <div id="wrapper">
-            <NavBar />
-            <Routes>
-              <Route exact path="/admin" element={<Content />} />
-              <Route exact path="/" element={<Content />} />
-              <Route exact path="/books" element={<Table />} />
-              <Route exact path="/register" element={<Signup />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/add-book" element={<AddBooks />} />
-              <Route exact path="/profile" element={<Profile />} />
-              <Route exact path="/pending" element={<Pending />} />
-              <Route exact path="/blocked" element={<Blocked />} />
-            </Routes>
-          </div>
+          </PrimeReactProvider>
 
-        </PrimeReactProvider>
-
-
+        </CookiesProvider>
       </ScrollTrigger>
     </>
   )

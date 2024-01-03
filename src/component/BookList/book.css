@@ -3,3 +3,11 @@
     border-radius: 10px;
     margin-bottom: 1rem;
 }
+td {
+  vertical-align: middle;
+}
+.border-success:hover{
+    background-color: rgba(118, 183, 118, 0.555);
+    color: white!important;
+    border: none!important;
+}

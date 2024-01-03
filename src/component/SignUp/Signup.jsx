@@ -12,14 +12,24 @@ import sendEmail from '../API/EmailJS';
 import Lottie from 'lottie-react';
 import animationData from '../../assets/Loading/Airplane.json';
 import ActivationRequest from '../API/Signup/ActivationRequest';
+import { SignupSchema } from '../../schemas';
+import { Calendar } from 'primereact/calendar';
 
-export default function Signup(name) {
+export default function Signup() {
   document.title = 'LMS - Signup';
+  let today = new Date();
+  let month = today.getMonth();
+  let year = today.getFullYear();
+  let nextMonth = month === 11 ? 0 : month + 1;
+  let tenPrevYears = nextMonth === 0 ? year - 10 : year - 9;
+
+  const [date, setDate] = useState(null);
+  let maxDate = new Date();
+  maxDate.setMonth(month);
+  maxDate.setFullYear(tenPrevYears);
+
+
   const navigate = useNavigate();
-  const [auth, setAuth] = useState({
-    password: '',
-    role: ''
-  })
   const toast = useRef(null);
   const [uOTP, setuOTP] = useState("")
   const message = ''
@@ -33,11 +43,25 @@ export default function Signup(name) {
 
   const [loading, setLoading] = useState(false);
 
-  const initialValues = { name: '', email: '', phone: '', role: '', admissionNo: '', course: '', branch: '', semester: '', password: '', password_repeat: '' }
+  const initialValues = {
+    name: '',
+    email: '',
+    phone: '',
+    role: '',
+    eid: '',
+    designation: '',
+    admissionNo: '',
+    dob: '',
+    course: '',
+    branch: '',
+    semester: '',
+    password: '',
+    password_repeat: ''
+  }
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      // validationSchema: SignUpSchema,
+      validationSchema: SignupSchema,
       onSubmit: async (values, action) => {
         const signupForm = document.getElementById('signupForm')
         const OTP_form = document.getElementById('OTP_form')
@@ -71,8 +95,8 @@ export default function Signup(name) {
       const jsonStudent = await CreateUser(values);
       const creationRequestResponse = await ActivationRequest(values.role);
       setLoading(false)
-      if (creationRequestResponse){
-        showSuccess(`Hello ${values.name}! Account creation request sent to Admin successfully`)        
+      if (creationRequestResponse) {
+        showSuccess(`Hello ${values.name}! Account creation request sent to Admin successfully`)
       }
       setLoading(false)
       setTimeout(() => {
@@ -88,14 +112,13 @@ export default function Signup(name) {
   }
   return (
     <>
-      <div className="show" style={{ zIndex: 99999}}>
+      <div className="show" style={{ zIndex: 99999 }}>
         <Toast ref={toast} />
-    </div>
+      </div>
       <div className="d-flex flex-column" id="content-wrapper">
         <div id="content">
-          {/* <TopNav /> */}
-          {loading && (<div className="container bg-white d-flex justify-content-center align-items-center" style={{position:'absolute', zIndex:999, minHeight:'120vh', minWidth: '100vw'}}>
-            <Lottie animationData={animationData} loop={true}/>
+          {loading && (<div className="container bg-white d-flex justify-content-center align-items-center" style={{ position: 'absolute', zIndex: 999, minHeight: '120vh', minWidth: '100vw' }}>
+            <Lottie animationData={animationData} loop={true} />
           </div>)}
 
           <section className=" signup" >
@@ -114,38 +137,72 @@ export default function Signup(name) {
                   <form onSubmit={handleSubmit} id='signupForm'>
 
                     <div className="mb-3">
-                      <InputText placeholder='Name' value={values.name} id='name' name="name" minLength="5" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Name' value={values.name} id='name' name="name" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      {errors.name && touched.name ? (
+                        <p className="form-error text-danger">{errors.name}</p>
+                      ) : null}
                     </div>
                     <div className="mb-3">
-                      <InputText placeholder='Email' value={values.email} id='email' name="email" minLength="5" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Email' value={values.email} id='email' name="email" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      {errors.email && touched.email ? (
+                        <p className="form-error text-danger">{errors.email}</p>
+                      ) : null}
                     </div>
                     <div className="mb-3">
-                      <InputText placeholder='Phone' value={values.phone} id='phone' name="phone" minLength="10" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Phone' value={values.phone} id='phone' name="phone" minLength="10" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      {errors.phone && touched.phone ? (
+                        <p className="form-error text-danger">{errors.phone}</p>
+                      ) : null}
                     </div>
                     <div className="mb-3 ">
-                      <Dropdown name='role' value={values.role} onChange={handleChange} options={['Student', 'Teacher']}
+                      <Dropdown name='role' value={values.role} onBlur={handleBlur} onChange={handleChange} options={['Student', 'Teacher']}
                         placeholder="Select Role" style={{ height: '50px', width: '80%' }} />
+                      {errors.role && touched.role ? (
+                        <p className="form-error text-danger">{errors.role}</p>
+                      ) : null}
                     </div>
                     {values.role === 'Student' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Course' value={values.course} name="course" minLength="5" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Branch' value={values.branch} name="branch" minLength="3" onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Course' value={values.course} name="course" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Semester' value={values.semester} name="semester" onChange={handleChange} style={{ height: '40px', width: '80%' }} /></div>
+                          <InputText placeholder='Branch' value={values.branch} name="branch" minLength="3" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                        </div>
+                        <div className="mb-3">
+                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} /></div>
+                      </>
+                    }
+                    {values.role === 'Teacher' &&
+                      <>
+                        <div className="mb-3">
+                          <InputText placeholder='Employee ID' value={values.admissionNo} name="eid" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                        </div>
+                        <div className="mb-3">
+                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                        </div>
+                        <div className="mb-3">
+                          <InputText placeholder='Designation' value={values.course} name="designation" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                        </div>
                       </>
                     }
                     <div className="mb-3">
-                      <Password name='password' value={values.password} placeholder='Password' onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <Password name='password' value={values.password} placeholder='Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      {errors.password && touched.password ? (
+                        <p className="form-error text-danger">{errors.password}</p>
+                      ) : null}
                     </div>
                     <div className="mb-3">
-                      <Password name='password_repeat' value={values.password_repeat} placeholder='Confirm Password' onChange={handleChange} style={{ height: '40px', width: '80%' }} feedback={false} tabIndex={1} />
+                      <Password name='password_repeat' value={values.password_repeat} placeholder='Confirm Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} feedback={false} tabIndex={1} />
+                      {errors.password_repeat && touched.password_repeat ? (
+                        <p className="form-error text-danger">{errors.password_repeat}</p>
+                      ) : null}
                     </div>
 
                     <div className="mb-2 ">

@@ -70,10 +70,8 @@ export default function ActivationRequest(props) {
                 name={props.name}
                 message={message}
                 isactiontaken={props.isactiontaken}
-                admissionNo={props.admissionNo}
-                semester={props.semester}
-                branch={props.branch}
-                course={props.course}
+                student={props.student}
+                teacher={props.teacher}
                 type={props.type}
                 time={props.time}
             />

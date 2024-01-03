@@ -18,7 +18,7 @@ const CreateUser = async (auth) =>{
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: auth.name, admissionNo: auth.admissionNo, course: auth.course, branch: auth.branch, semester: auth.semester }),
+        body: JSON.stringify({ name: auth.name, admissionNo: auth.admissionNo, course: auth.course, dob: auth.dob, branch: auth.branch, semester: auth.semester }),
     });
     const jsonStudent = await responseStudent.json();
     return jsonStudent;

@@ -47,6 +47,7 @@ const TopNav = () => {
         try {
             const requests = await AllActivationRequests();
             setAllUserActivationRequest(requests);
+            // console.log("allUserActivationRequest", allUserActivationRequest[4].eid)
             const unseenRequestCount = requests.filter(request => !request.seen).length;
             setActivationRequestCount(unseenRequestCount);
         } catch (error) {
@@ -77,7 +78,7 @@ const TopNav = () => {
                                     <li className="nav-item dropdown no-arrow mx-1">
                                         <div className="nav-item dropdown no-arrow">
                                             <Link className="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown">
-                                            {ActivationRequestCount > 0 && (
+                                                {ActivationRequestCount > 0 && (
                                                     <span className="badge bg-danger badge-counter">
                                                         {ActivationRequestCount > 5 ? '5+' : ActivationRequestCount}
                                                     </span>
@@ -101,21 +102,18 @@ const TopNav = () => {
                                                             return 1;
                                                         }
                                                     })
-                                                    .slice(0, 5).map((alert) => (
-
+                                                    .slice(0, 5)
+                                                    .map((alert) => (                                                        
                                                         <ActivationRequest
                                                             key={alert._id}
+                                                            student={alert.student}
+                                                            teacher={alert.teacher}
                                                             _id={alert._id}
                                                             showError={showError}
                                                             showSuccess={showSuccess}
-                                                            status= {alert.status}
-                                                            allAlert={allAlert}
+                                                            status={alert.status}
                                                             name={alert.userName}
                                                             user={alert.user}
-                                                            branch={alert.branch}
-                                                            course={alert.course}
-                                                            admissionNo={alert.admissionNo}
-                                                            semester={alert.semester}
                                                             time={alert.time}
                                                             seen={alert.seen}
                                                             isactiontaken={alert.isactiontaken}

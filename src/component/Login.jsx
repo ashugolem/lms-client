@@ -11,11 +11,13 @@ import { InputText } from 'primereact/inputtext';
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import RoleBasedAuthentication from './RBA/RBA';
+import { useCookies } from "react-cookie";
 
 function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isLoggedIn = useSelector((state) => state.setLog.isLoggedIn)
+  const [cookies, setCookie] = useCookies(["auth-token"]);
 
   const initialValues = { email: '', password: '' }
 
@@ -33,6 +35,8 @@ function Login() {
         if (response.success) {
           dispatch(setLoggedIn(true));
           localStorage.clear();
+          setCookie("auth-token", response.authToken, { path: "/", httpOnly: true, sameSite: 'None' });
+          console.log(cookies['auth-token'])
           localStorage.setItem('auth-token', response.authToken);
           localStorage.setItem('user-id', response.id);
           dispatch(setRole(Decode().user.role))
@@ -78,7 +82,7 @@ function Login() {
                     <div className="mb-3">
                       <input
                         className="shadow form-control"
-                        style={{ borderRadius: "5px", height:"55px!important" }}
+                        style={{ borderRadius: "5px"}}
                         type="email"
                         name="email"
                         value={values.email}
@@ -94,7 +98,7 @@ function Login() {
                     <div className="mb-3">
                       <input
                         className="shadow form-control"
-                        style={{ borderRadius: "5px", height: "55px" }}
+                        style={{ borderRadius: "5px", height: "39px" }}
                         type="password"
                         value={values.password}
                         name="password"
@@ -109,8 +113,8 @@ function Login() {
                     </div>
                     <div className="mb-5">
                       <button
-                        className="btn btn-primary shadow px-3 py-2"
-                        style={{ borderRadius: "2rem" }}
+                        className="btn btn-primary shadow px-4 py-2 mt-3"
+                        style={{ borderRadius: "0.5rem" }}
                         type="submit"
                       >
                         Log in
