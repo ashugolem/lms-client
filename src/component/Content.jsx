@@ -162,7 +162,13 @@ const Content = () => {
                                   <tr>
                                     <td>
                                       {/* <img className="img-profile" style={{ width: '5.5rem', height: '5.5rem' }} src={`src/assets/img/avatars/defaultContact.png`} alt="" /> */}
-                                      <Avatar label={user.name.slice(0)[0]} size="xlarge" className='bg-primary text-white' shape="circle" />
+                                      {
+                                        user.profile === undefined
+                                        ?
+                                        <Avatar label={user.name.slice(0)[0]} size="xlarge" className='bg-primary text-white' shape="circle" />
+                                        :
+                                        <Avatar image={user.profile} size="xlarge" shape="circle" />
+                                      }
                                     </td>
                                     <td>{localStorage.getItem('user-id') === user._id.toString() ? `${user.name} (You)` : user.name}</td>
                                     <td>{user.role}</td>

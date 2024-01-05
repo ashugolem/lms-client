@@ -212,6 +212,7 @@ const TopNav = () => {
                                                         <Request
                                                             key={request._id}
                                                             _id={request._id}
+                                                            profile={request.profile}
                                                             name={request.userName}
                                                             user={request.user}
                                                             book={request.book}

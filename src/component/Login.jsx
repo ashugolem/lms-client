@@ -7,7 +7,6 @@ import { setLoggedIn, setUserName, setRole } from './Action/index';
 import Decode from './JWT/Decode';
 import { LoginSchema } from '../schemas';
 import LoginApi from './API/Login';
-import { InputText } from 'primereact/inputtext';
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import RoleBasedAuthentication from './RBA/RBA';

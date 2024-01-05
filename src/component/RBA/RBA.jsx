@@ -24,7 +24,7 @@ const RoleBasedAuthentication = () => {
         }
     }, [role, navigate]);
 
-    return null; // You can return null or any component, this is just a placeholder
+    return null; 
 };
 
 export default RoleBasedAuthentication;

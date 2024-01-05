@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import CreateRequest from '../API/Request/CreateRequest';
 import { Toast } from 'primereact/toast';
 
-const BookLentModal = ({show, code, onClose, title, author, selfNo}) => {
+const BookLentModal = ({show, code, onClose, title, author, selfNo, book}) => {
     const styles = {
         table: {
             padding: '0px',
@@ -17,10 +17,10 @@ const BookLentModal = ({show, code, onClose, title, author, selfNo}) => {
         toastTopCenter.current.show({ severity: 'success', summary: 'Success', detail: 'Request Successfully Sent to Librarian', life: 3000 });
     }
     const handleLent = async () => {
-        const response = await CreateRequest(localStorage.getItem('user-id'), props.book )
+        const response = await CreateRequest(localStorage.getItem('user-id'), book )
         if (response.success) {
             showSuccess()
-            props.onClose();
+            onClose();
         }
     }
     return (

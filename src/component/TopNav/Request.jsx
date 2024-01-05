@@ -6,7 +6,7 @@ import UpdateStatusModal from '../Modal/UpdateStatusModal'
 export default function Request(props) {
     const [indicator, setIndicator] = useState(props.seen)
     const [modalVisible, setModalVisible] = useState(false);
-    
+
     const handleRead = async () => {
         try {
             setModalVisible(true);
@@ -48,7 +48,13 @@ export default function Request(props) {
 
             <Link className="dropdown-item d-flex align-items-center" onClick={handleRead}>
                 <div className="dropdown-list-image me-3">
-                    <img className="rounded-circle" src="src/assets/img/avatars/defaultContact.png" />
+                    {
+                        props.profile === null
+                            ?
+                            <img className="rounded-circle" src="src/assets/img/avatars/defaultContact.png" />
+                            :
+                            <img className="rounded-circle" src={props.profile} />
+                    }
                     <div className={`bg-${indicator ? 'success' : 'danger'} status-indicator`}></div>
                 </div>
                 <div className={`fw-${!indicator ? 'bold' : ''}`}>
