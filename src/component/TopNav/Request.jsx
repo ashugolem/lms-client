@@ -35,6 +35,7 @@ export default function Request(props) {
                 show={modalVisible}
                 onClose={() => setModalVisible(false)}
                 name={props.name}
+                role={props.role}
                 action={props.type}
                 bookName={props.bookName}
                 user={props.user}

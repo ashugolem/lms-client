@@ -215,6 +215,7 @@ const TopNav = () => {
                                                             profile={request.profile}
                                                             name={request.userName}
                                                             user={request.user}
+                                                            role={request.role}
                                                             book={request.book}
                                                             bookName={request.bookName}
                                                             time={request.time}

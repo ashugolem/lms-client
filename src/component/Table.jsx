@@ -54,7 +54,7 @@ function Table() {
             width: '100vw',
         }
     };
-
+    document.title = "LMS - Library"
     // Pagination Logic
     const [currentPage, setCurrentPage] = useState(1);
     const paginatedBooks = allBooks.slice(

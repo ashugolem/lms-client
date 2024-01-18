@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { InputNumber } from 'primereact/inputnumber'
 import React, { useState } from 'react'
 
-export default function FineSettings() {
+export default function FineSettings(props) {
     const initialValues = { finePrice: '', deadline: '' }
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
@@ -30,11 +30,11 @@ export default function FineSettings() {
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit} className='d-flex align-items-center justify-content-center' style={{border: 'none'}}>
+            <form onSubmit={handleSubmit} className='d-flex align-items-center flex-column justify-content-center' style={{border: ''}}>
+                <h5 className='mt-3 text-start w-100'>For {props.userType}</h5>
                 <div className="mb-3">
                     <InputNumber
-                        className="shadow form-control"
-                        style={{ borderRadius: "5px" }}
+                        className="shadow"
                         name="finePrice"
                         value={values.finePrice}
                         placeholder="Fine Price"
@@ -49,8 +49,7 @@ export default function FineSettings() {
                 </div>
                 <div className="mb-3">
                     <InputNumber
-                        className="shadow form-control"
-                        style={{ borderRadius: "5px" }}
+                        className="shadow"
                         name="deadline"
                         value={values.deadline}
                         placeholder="Deadline in months"
@@ -58,7 +57,7 @@ export default function FineSettings() {
                         onBlur={handleBlur}
                         autoComplete='true'/>
                 </div>
-                <div className="mb-5">
+                <div className="mb-2">
                     <button
                         className="btn btn-primary shadow px-4 py-2 mt-3"
                         style={{ borderRadius: "0.5rem" }}
@@ -67,7 +66,7 @@ export default function FineSettings() {
                         Update
                     </button>
                 </div>
-            </form> */}
+            </form>
         </>
     )
 }

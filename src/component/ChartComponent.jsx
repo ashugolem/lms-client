@@ -34,7 +34,7 @@ const ChartComponent = (props) => {
     }
     return (
         <>
-            <div className="container pt-3" style={{width:'95%'}}>
+            <div className="container pt-3" style={{width:'100%'}}>
                 <Doughnut data={userData}/>
             </div>
         </>

@@ -8,7 +8,7 @@ export default function Counter(props) {
     return (
         <ScrollTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
             <div
-                className="text-light text-larger fw-bold h5 mb-0"
+                className="text-light text-larger fw-bold h6 mb-0"
                 data-aos="zoom-out"
                 data-aos-duration="950"
                 data-aos-delay="300">

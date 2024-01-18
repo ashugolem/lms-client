@@ -6,18 +6,21 @@ export const NavBar = () => {
   const loggedIn = useSelector((state) => state.setLog.isLoggedIn);
   const role = useSelector((state) => state.setLog.role);
   useEffect(() => {
-    const sidebarToggleBtn = document.getElementById('sidebarToggle');
+    const nav = document.querySelector('nav');
+    const sidebar = document.querySelector('.sidebar');
 
     const toggleSidebar = () => {
-      const sidebar = document.querySelector('.sidebar');
       sidebar.classList.toggle('toggled');
-
+      const isToggled = sidebar.classList.contains('toggled');
+      nav.style.transition = isToggled ? 'width 0.5s ease' : 'width 0.5s ease-out';
     };
-    sidebarToggleBtn.addEventListener('click', toggleSidebar);
+
+    nav.addEventListener('mouseover', toggleSidebar);
+    nav.addEventListener('mouseout', toggleSidebar);
 
     return () => {
-      // Cleanup: Remove the event listener when the component is unmounted
-      sidebarToggleBtn.removeEventListener('click', toggleSidebar);
+      nav.removeEventListener('mouseover', toggleSidebar);
+      nav.removeEventListener('mouseout', toggleSidebar);
     };
   }, []);
   return (
@@ -58,9 +61,7 @@ export const NavBar = () => {
           </>}
 
         </ul>
-        <div className="text-center d-none d-md-inline">
-          <button className="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
-        </div>
+        
       </div>
     </nav>
   )

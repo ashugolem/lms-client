@@ -4,6 +4,7 @@ const AddBook = async (book) =>{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "auth-token": localStorage.getItem('auth-token')
             },
             body: JSON.stringify({...book, total:book.stock}),
         });

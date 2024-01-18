@@ -15,7 +15,7 @@ const UpdateStatusModal = (props) => {
 
     const handleAccept = async () => {
         ChangeStatus('Accepted', props._id);
-        IssueBook(props.user, props.book);
+        IssueBook(props.user, props.role, props.book);
         await fetchData()
         props.onClose();
     };
