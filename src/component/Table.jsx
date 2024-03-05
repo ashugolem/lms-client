@@ -12,23 +12,31 @@ function Table() {
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false)
     const [allBooks, setAllBooks] = useState([])
+    const [start, setStart] = useState(0)
+    const [end, setEnd] = useState(20)
+    const [lazyLoadingConstant, setLazyLoadingConstant] = useState(20)
+    const [totalBooksCount,  setTotalBooksCount] = useState(-1)
+    const [currentlyLoaded,  setCurrentlyLoaded] = useState(0)
     const role = useSelector((state) => state.setLog.role)
     const [PAGE_SIZE, setPAGE_SIZE] = useState(5);
     const [pages, setPages] = useState([])
     const [totalPages, setTotalPage] = useState(0);
 
-    const getBooks = async () => {
+    const getBooks = async (start, end) => {
         try {
             setLoading(true)
-            const response = await fetch(`${import.meta.env.VITE_HOST}/book/`, {
+            
+            console.log("Calling API with start-", start, "end-", end)
+            const response = await fetch(`${import.meta.env.VITE_HOST}/book/${start}/${end}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
             const json = await response.json();
-            setAllBooks(json);
-            const totalPage = Math.ceil(json.length / PAGE_SIZE)
+            setAllBooks(allBooks.concat(json.books));     
+            setTotalBooksCount(json.totalBooks)       
+            const totalPage = Math.ceil(Number(json.totalBooks) / PAGE_SIZE)
             setTotalPage(totalPage)
             setPages(Array.from({ length: totalPage }))
         } catch (error) {
@@ -39,7 +47,7 @@ function Table() {
     }
 
     useEffect(() => {
-        getBooks();
+        getBooks(start, end);
     }, [])
 
     const styles = {
@@ -61,8 +69,27 @@ function Table() {
         (currentPage - 1) * PAGE_SIZE,
         currentPage * PAGE_SIZE
     );
-    const handlePageChange = (page) => {
+    const handleLazyLoading = async () => {
+        const newStart = end;
+        const newEnd = end + lazyLoadingConstant;
+
+        console.log("Lazy Loading Called start-", newStart, "end-", newEnd);
+
+        setStart(newStart);
+        setEnd(newEnd);
+
+        await getBooks(newStart, newEnd);
+        setCurrentlyLoaded(newEnd);
+    };
+
+    const handlePageChange = async (page) => {
         setCurrentPage(page);
+        setStart(start +  PAGE_SIZE);
+        const totalPagePerLoad = Math.ceil(Number(allBooks.length) / PAGE_SIZE)
+        console.log(totalPages, totalPagePerLoad, currentPage)
+        if ((totalPagePerLoad === currentPage+1) && currentlyLoaded <= end && end<totalBooksCount ) {
+            await handleLazyLoading();
+        }
     };
 
     return (
@@ -97,22 +124,13 @@ function Table() {
                                                                 name='search' 
                                                                 placeholder="Search"
                                                                 onChange={(e) => {
-                                                                    setTimeout(() => {
+                                                                    setTimeout(async () => {
                                                                         setSearch(e.target.value)
+                                                                        await getBooks(0, totalBooksCount)
                                                                     }, 500);
                                                                 }}
                                                             />
                                                         </span>
-                                                        {/* <input
-                                                            type="search"
-                                                            className="form-control form-control-sm" aria-controls="dataTable"
-                                                            name='search' placeholder="Search"
-                                                            onChange={(e) => {
-                                                                setTimeout(() => {
-                                                                    setSearch(e.target.value)
-                                                                }, 500);
-                                                            }}
-                                                        /> */}
                                                     </label>
                                                 </div>
                                             </div>

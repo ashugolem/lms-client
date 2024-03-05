@@ -24,7 +24,7 @@ export const NavBar = () => {
     };
   }, []);
   return (
-    <nav className="navbar toggled navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <nav className="navbar p-fixed toggled navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
       <div className="container-fluid d-flex flex-column p-0">
         <Link className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" to={'/'}>
           <div className="sidebar-brand-icon rotate-n-15">
@@ -45,7 +45,7 @@ export const NavBar = () => {
               <>
                 <NavLink icon="fas fa-book" path="/table" name="Lent Book" />
                 <NavLink icon="fas fa-book" path="/table" name="Submit Book" />
-                <NavLink icon="fas fa-table" path="/table" name="Record" />
+                <NavLink icon="fas fa-table" path="/fine" name="Fine" />
               </>}
             {(role === "Admin" || role === "Teacher") &&
               <>

@@ -15,6 +15,10 @@ export const LoginSchema = Yup.object({
     email: Yup.string().email().required('Email is required'),
     password: Yup.string().min(5).required('Password is required'),
 })
+export const FineSchema = Yup.object({
+    finePerDay: Yup.number().required('Enter the daily fine amount'),
+    deadline: Yup.number().required('Enter the deadline'),
+})
 
 export const SignupSchema = Yup.object({
     name: Yup.string().min(3).required('Name is required'),

@@ -17,6 +17,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Profile from './component/Profile/Profile';
 import { CookiesProvider } from 'react-cookie';
 import ProtectedRoute from './ProtectedRoute';
+import Fine from './component/Fine/Fine';
 
 function App() {
   useEffect(() => {
@@ -51,6 +52,11 @@ function App() {
                 <Route exact path="/profile" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
                     <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/fine" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <Fine />
                   </ProtectedRoute>
                 } />
                 <Route exact path="/pending" element={<Pending />} />
