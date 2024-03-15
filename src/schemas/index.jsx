@@ -12,7 +12,7 @@ export const AddBookSchema = Yup.object({
 })
 
 export const LoginSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
+    email: Yup.string().email().required('Email or User ID is required'),
     password: Yup.string().min(5).required('Password is required'),
 })
 export const FineSchema = Yup.object({
