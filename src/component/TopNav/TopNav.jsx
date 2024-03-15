@@ -4,7 +4,7 @@ import GetRequest from '../API/GetRequest'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoggedIn } from '../Action/index';
-import Alert from './ALert';
+import Alert from './Alert';
 import AllActivationRequests from '../API/User Activation/GetUserActivation';
 import ActivationRequest from './ActivationRequest';
 
