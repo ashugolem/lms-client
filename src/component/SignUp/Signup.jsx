@@ -125,7 +125,7 @@ export default function Signup() {
             <div className="container pt-5" >
               <div className="row justify-content-center">
                 <div className="col-md-6 text-center" >
-                  <img className="img-fluid w-100" src="src/assets/img/illustrations/register.svg" alt="Registration Illustration" />
+                  <img className="img-fluid w-100" src="/img/illustrations/register.svg" alt="Registration Illustration" />
                 </div>
                 <div className="col-md-2 col-xl-4 text-center text-md-start ">
                   <h2 className="display-6 fw-bold mb-5">
@@ -164,31 +164,58 @@ export default function Signup() {
                     {values.role === 'Student' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} /> {errors.admissionNo && touched.admissionNo ? (
+                            <p className="form-error text-danger">{errors.admissionNo}</p>
+                          ) : null}
                         </div>
                         <div className="mb-3">
                           <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.dob && touched.dob ? (
+                            <p className="form-error text-danger">{errors.dob}</p>
+                          ) : null}
                         </div>
                         <div className="mb-3">
                           <InputText placeholder='Course' value={values.course} name="course" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.course && touched.course ? (
+                            <p className="form-error text-danger">{errors.course}</p>
+                          ) : null}
                         </div>
                         <div className="mb-3">
                           <InputText placeholder='Branch' value={values.branch} name="branch" minLength="3" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.branch && touched.branch ? (
+                            <p className="form-error text-danger">{errors.branch}</p>
+                          ) : null}
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} /></div>
+                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.semester && touched.semester ? (
+                            <p className="form-error text-danger">{errors.semester}</p>
+                          ) : null}
+                        </div>
                       </>
                     }
                     {values.role === 'Teacher' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Employee ID' value={values.admissionNo} name="eid" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Employee ID' value={values.eid} name="eid" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.eid && touched.eid ? (
+                            <p className="form-error text-danger">{errors.eid}</p>
+                          ) : null}
+
                         </div>
                         <div className="mb-3">
                           <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.dob && touched.dob ? (
+                            <p className="form-error text-danger">{errors.dob}</p>
+                          ) : null}
+
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Designation' value={values.course} name="designation" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Designation' value={values.designation} name="designation" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          {errors.designation && touched.designation ? (
+                            <p className="form-error text-danger">{errors.designation}</p>
+                          ) : null}
+
                         </div>
                       </>
                     }
@@ -209,7 +236,7 @@ export default function Signup() {
                       <button style={{ visibility: "hidden", color: "red", fontSize: "15px", borderRadius: "5px" }} className={`btn p-0 warn`}>{message}</button>
                     </div>
                     <div className="mb-5">
-                      <button disabled={values.password.length <= 5 ? true : false} className="btn btn-primary shadow px-3 py-2" type="submit" style={{ borderRadius: "2rem" }}>
+                      <button  className="btn btn-primary shadow px-3 py-2" type="submit" style={{ borderRadius: "2rem" }}>
                         {loading ? (
                           <Lottie
                             animationData={animationData}

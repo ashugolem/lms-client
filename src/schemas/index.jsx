@@ -25,6 +25,13 @@ export const SignupSchema = Yup.object({
     phone: Yup.string().min(10, "Minimum Length should must be 10").required('Phone is required'),
     email: Yup.string().email().required('Email is required'),
     role: Yup.string().min(3).required('Role is required'),
+    eid: Yup.string().min(3).required('Employee ID is required'),
+    designation: Yup.string().min(3).required('Designation is required'),
+    admissionNo: Yup.string().min(3).required('Admission Number is required'),
+    dob: Yup.string().min(3).required('Date of Birth is required'),
+    course: Yup.string().min(3).required('Course is required'),
+    branch: Yup.string().min(3).required('Branch is required'),
+    year: Yup.string().min(3).required('Year is required'),
     password: Yup.string().min(5).required('Password is required'),
     password_repeat: Yup.string().min(5,"Minimum Length should must be 5").required('Password is required'),
 })

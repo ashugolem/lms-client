@@ -27,6 +27,7 @@
     "@nivo/line": "^0.84.0",
     "@nivo/pie": "^0.84.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@vercel/speed-insights": "^1.0.10",
     "aos": "^2.3.4",
     "axios": "^1.6.4",
     "chart.js": "^4.4.0",

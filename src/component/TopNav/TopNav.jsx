@@ -242,7 +242,7 @@ const TopNav = () => {
                                 <div className="nav-item dropdown no-arrow">
                                     <Link className="dropdown-toggle nav-link " aria-expanded="false" data-bs-toggle="dropdown">
                                         <span className="d-none d-lg-inline me-2 text-gray-600 "><b>{userName}</b> - {role}</span>
-                                        <img className="border rounded-circle img-profile" src="src/assets/img/avatars/defaultContact.png" />
+                                        <img className="border rounded-circle img-profile" src="/img/avatars/defaultContact.png" />
                                     </Link>
                                     <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                         <Link className="dropdown-item" to={'/profile'}>

@@ -66,7 +66,7 @@ function Login() {
                 <div className="col-md-6 text-center">
                   <img
                     className="img-fluid w-100"
-                    src="src/assets/img/illustrations/login.svg"
+                    src="/img/illustrations/login.svg"
                     alt="Login Illustration"
                   />
                 </div>
