@@ -10,7 +10,9 @@ import LoginApi from './API/Login';
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import RoleBasedAuthentication from './RBA/RBA';
+import animationData from '../assets/Loading/Airplane.json';
 import { useCookies } from "react-cookie";
+import Lottie from 'lottie-react';
 
 function Login() {
   const dispatch = useDispatch()
@@ -19,7 +21,7 @@ function Login() {
   const [cookies, setCookie] = useCookies(["auth-token"]);
 
   const initialValues = { email: '', password: '' }
-
+  const [loading, setLoading] = useState(false);
   const toast = useRef(null);
 
   const showError = (errorMsg) => {
@@ -30,7 +32,9 @@ function Login() {
       initialValues,
       validationSchema: LoginSchema,
       onSubmit: async (values, action) => {
+        setLoading(true)
         const response = await LoginApi(values)
+        setLoading(false)
         if (response.success) {
           dispatch(setLoggedIn(true));
           localStorage.clear();
@@ -59,7 +63,9 @@ function Login() {
       <Toast ref={toast} />
       <div className="d-flex flex-column" id="content-wrapper">
         <div id="content">
-          <TopNav />
+          {loading && (<div className="container bg-white d-flex justify-content-center align-items-center" style={{ position: 'absolute', zIndex: 999, minHeight: '120vh', minWidth: '100vw' }}>
+            <Lottie animationData={animationData} loop={true} />
+          </div>)}
           <section className="py-md-5" >
             <div className="container py-md-5">
               <div className="row justify-content-center">
