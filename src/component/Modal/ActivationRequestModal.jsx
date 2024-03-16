@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import './UpdateStatusModal.css';
 import UpdateUserActivation from '../API/User Activation/UpdateUserActivation';
 
-const DetailsModal = ({ student, teacher, _id, showError, setStatus, onClose, show, message, name, type, isactiontaken, status }) => {
+const DetailsModal = ({ student, teacher, _id, showError, showSuccess, setStatus, onClose, show, message, name, type, isactiontaken, status }) => {
     const styles = {
         table: {
             padding: '0px',

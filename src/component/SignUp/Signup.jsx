@@ -61,7 +61,7 @@ export default function Signup() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      validationSchema: SignupSchema,
+      // validationSchema: SignupSchema,
       onSubmit: async (values, action) => {
         const signupForm = document.getElementById('signupForm')
         const OTP_form = document.getElementById('OTP_form')
@@ -92,7 +92,7 @@ export default function Signup() {
     e.preventDefault();
     if (uOTP === rOTP) {
       setLoading(true)
-      const jsonStudent = await CreateUser(values);
+      const jsonStudent = await CreateUser(values, values.role);
       const creationRequestResponse = await ActivationRequest(values.role);
       setLoading(false)
       if (creationRequestResponse) {
@@ -197,21 +197,21 @@ export default function Signup() {
                     {values.role === 'Teacher' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Employee ID' value={values.eid} name="eid" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Employee ID' value={values.eid} name="eid"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                           {errors.eid && touched.eid ? (
                             <p className="form-error text-danger">{errors.eid}</p>
                           ) : null}
 
                         </div>
                         <div className="mb-3">
-                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                           {errors.dob && touched.dob ? (
                             <p className="form-error text-danger">{errors.dob}</p>
                           ) : null}
 
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Designation' value={values.designation} name="designation" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Designation' value={values.designation} name="designation"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
                           {errors.designation && touched.designation ? (
                             <p className="form-error text-danger">{errors.designation}</p>
                           ) : null}

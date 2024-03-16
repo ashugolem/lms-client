@@ -10,9 +10,9 @@ import LoginApi from './API/Login';
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import RoleBasedAuthentication from './RBA/RBA';
-import animationData from '../assets/Loading/Airplane.json';
 import { useCookies } from "react-cookie";
 import Lottie from 'lottie-react';
+import animationData from '../assets/Loading/Airplane.json';
 
 function Login() {
   const dispatch = useDispatch()
@@ -27,6 +27,12 @@ function Login() {
   const showError = (errorMsg) => {
     toast.current.show({ severity: 'error', summary: 'Error', detail: errorMsg, life: 3000 });
   }
+  const styles = {
+    animation: {
+      height: '100dvh',
+      width: '100vw',
+    }
+  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -61,11 +67,15 @@ function Login() {
   return (
     <>
       <Toast ref={toast} />
+      {loading
+        ?
+        <div className="container d-flex justify-content-center" style={styles.animation}>
+          <Lottie animationData={animationData} loop={true} style={{ width: '250px' }} />
+        </div>
+
+        :
       <div className="d-flex flex-column" id="content-wrapper">
         <div id="content">
-          {loading && (<div className="container bg-white d-flex justify-content-center align-items-center" style={{ position: 'absolute', zIndex: 999, minHeight: '120vh', minWidth: '100vw' }}>
-            <Lottie animationData={animationData} loop={true} />
-          </div>)}
           <section className="py-md-5" >
             <div className="container py-md-5">
               <div className="row justify-content-center">
@@ -143,7 +153,7 @@ function Login() {
           </section>
           <NotSure heading="Facing error while Login" description="Contact us by the button on the right or email us at support@edusync.com" />
         </div>
-      </div>
+      </div>}
     </>
   )
 }
