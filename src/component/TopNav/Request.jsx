@@ -52,7 +52,7 @@ export default function Request(props) {
                     {
                         props.profile === null
                             ?
-                            <img className="rounded-circle" src="src/assets/img/avatars/defaultContact.png" />
+                            <img className="rounded-circle" src="/img/avatars/defaultContact.png" />
                             :
                             <img className="rounded-circle" src={props.profile} />
                     }

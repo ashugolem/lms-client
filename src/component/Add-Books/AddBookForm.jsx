@@ -51,7 +51,7 @@ export default function AddBookForm() {
                     <img
                         style={{ maxWidth: "550px" }}
                         className="img-fluid w-100"
-                        src="public/img/illustrations/Book.svg"
+                        src="/img/illustrations/Book.svg"
                         alt="Add-Note Illustration"
                     />
                 </div>
