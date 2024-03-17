@@ -20,7 +20,7 @@ function Login() {
   const isLoggedIn = useSelector((state) => state.setLog.isLoggedIn)
   const [cookies, setCookie] = useCookies(["auth-token"]);
 
-  const initialValues = { email: 'singh.ashishhhh@gmail.com', password: '123456' }
+  const initialValues = { email: '', password: '' }
   const [loading, setLoading] = useState(false);
   const toast = useRef(null);
 
@@ -134,8 +134,8 @@ function Login() {
                       >
                         Log in
                       </button>
-                        <p className="form-error text-success">Admin Email : singh.ashishhhh@gmail.com</p>
-                        <p className="form-error text-success">Password : 123456</p>
+                        <p className="form-error mt-3 text-muted">Admin Email : singh.asishhhh@gmail.com</p>
+                        <p className="form-error text-muted">Password : 123456</p>
                     </div>
                     <p className="text-muted">
                       <Link to="/forgot-password">Forgot your password?</Link>
