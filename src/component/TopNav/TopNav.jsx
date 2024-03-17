@@ -19,7 +19,7 @@ const TopNav = () => {
     const role = useSelector((state) => state.setLog.role)
     const userName = useSelector((state) => state.setLog.username);
     const loggedIn = useSelector((state) => state.setLog.isLoggedIn);
-    useState
+    const [profile, setProfile] = useState(null);
     const navigate = useNavigate()
     const toast = useRef(null);
     const showError = (errorMsg) => {
@@ -47,6 +47,20 @@ const TopNav = () => {
         try {
             const requests = await AllActivationRequests();
             setAllUserActivationRequest(requests);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_HOST}/user/get-user`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({id: localStorage.getItem("user-id")})
+                });
+                const userProfile = await response.json();
+                setProfile(userProfile.profile)
+
+            } catch (error) {
+                console.log(error.message)
+            }
             // console.log("allUserActivationRequest", allUserActivationRequest[4].eid)
             const unseenRequestCount = requests.filter(request => !request.seen).length;
             setActivationRequestCount(unseenRequestCount);
@@ -241,10 +255,11 @@ const TopNav = () => {
                             <li className="nav-item dropdown no-arrow">
                                 <div className="nav-item dropdown no-arrow">
                                     <Link className="dropdown-toggle nav-link " aria-expanded="false" data-bs-toggle="dropdown">
-                                        <span className="d-none d-lg-inline me-2 text-gray-600 "><b>{userName}</b> - {role}</span>
-                                        <img className="border rounded-circle img-profile" src="/img/avatars/defaultContact.png" />
+                                        <span className="d-none d-lg-inline me-2 text-gray-600 "><b>{role==="Admin"?"Hello ": userName}</b> - {role}</span>
+                                        <img className="border rounded-circle img-profile" src={profile? profile :"/img/avatars/defaultContact.png"} />
                                     </Link>
-                                    <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+
+                                    {role === "Student" && <div className="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                         <Link className="dropdown-item" to={'/profile'}>
                                             <i className="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                                             &nbsp;Profile
@@ -262,7 +277,7 @@ const TopNav = () => {
                                             <i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
                                             &nbsp;Logout
                                         </Link>
-                                    </div>
+                                    </div>}
                                 </div>
                             </li>
                         </ul>
