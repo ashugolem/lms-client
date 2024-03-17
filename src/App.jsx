@@ -18,6 +18,7 @@ import Profile from './component/Profile/Profile';
 import { CookiesProvider } from 'react-cookie';
 import ProtectedRoute from './ProtectedRoute';
 import Fine from './component/Fine/Fine';
+import BookTransaction from './component/Transactions/BookTransaction';
 
 function App() {
   useEffect(() => {
@@ -37,7 +38,6 @@ function App() {
               <Routes>
                 <Route exact path="/register" element={<Signup />} />
                 <Route exact path="/login" element={<Login />} />
-                <Route exact path="/add-book" element={<AddBooks />} />
                 {/* Protected Routes */}
                 <Route exact path="/admin" element={
                   <ProtectedRoute roles={['Admin']}>
@@ -52,6 +52,16 @@ function App() {
                 <Route exact path="/profile" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
                     <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/add-book" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher']}>
+                    <AddBooks />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/transaction" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <BookTransaction />
                   </ProtectedRoute>
                 } />
                 <Route exact path="/fine" element={
