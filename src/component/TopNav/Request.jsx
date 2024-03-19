@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment/moment'
 import UpdateStatusModal from '../Modal/UpdateStatusModal'
+import { Toast } from 'primereact/toast'
 
 export default function Request(props) {
     const [indicator, setIndicator] = useState(props.seen)
     const [modalVisible, setModalVisible] = useState(false);
-
+    const toast = useRef(null);
+    const showError = (errorMsg) => {
+        toast.current.show({ severity: 'error', summary: 'Error', detail: errorMsg, life: 3000 });
+    }
+    const showSuccess = (msg) => {
+        toast.current.show({ severity: 'success', summary: 'Success', detail: msg, life: 3000 });
+    }
     const handleRead = async () => {
         try {
             setModalVisible(true);
@@ -45,8 +52,10 @@ export default function Request(props) {
                 eid={props.eid}
                 code={props.code}
                 selfNo={props.selfNo}
+                showError={showError}
+                showSuccess={showSuccess}
             />
-
+            <Toast ref={toast} />
             <Link className="dropdown-item d-flex align-items-center" onClick={handleRead}>
                 <div className="dropdown-list-image me-3">
                     {

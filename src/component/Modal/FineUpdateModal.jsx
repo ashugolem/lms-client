@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import { Modal, Button, ModalHeader } from 'react-bootstrap';
 import { FineSchema } from '../../schemas';
 import { InputText } from 'primereact/inputtext';
-import { Toast } from 'primereact/toast';
 import animationData from '../../assets/Loading/Airplane.json';
 import Lottie from 'lottie-react';
 import CreateFine from '../API/CreateFine';

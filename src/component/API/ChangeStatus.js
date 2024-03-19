@@ -8,7 +8,7 @@ const ChangeStatus = async (status, id) => {
             body: JSON.stringify({ status: status }),
         });
         const json = await response.json();
-        console.log(status)
+        return json;
 
     } catch (error) {
         console.log(error.message)

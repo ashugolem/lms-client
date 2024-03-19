@@ -16,11 +16,18 @@ const BookLentModal = ({show, code, onClose, title, author, selfNo, book}) => {
     const showSuccess = () => {
         toastTopCenter.current.show({ severity: 'success', summary: 'Success', detail: 'Request Successfully Sent to Librarian', life: 3000 });
     }
+    const showError = (errorMsg) => {
+        toastTopCenter.current.show({ severity: 'error', summary: 'Error', detail: errorMsg, life: 3000 });
+    }
     const handleLent = async () => {
         const response = await CreateRequest(localStorage.getItem('user-id'), book )
         if (response.success) {
             showSuccess()
             onClose();
+        }
+        else{
+            showError(response.message)
+            onClose()
         }
     }
     return (
