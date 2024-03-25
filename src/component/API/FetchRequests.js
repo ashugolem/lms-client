@@ -5,18 +5,15 @@ const useFetchData = () => {
     const [allRequests, setAllRequest] = useState([]);
     const [count, setCount] = useState(0);
 
-    const fetchData = async () => {
+    const fetchData = async (end) => {
         try {
-            const requests = await GetRequest();
-
-            setAllRequest(requests);
-
-            const unseenRequestsCount = requests.filter(request => !request.seen).length;
-            setCount(unseenRequestsCount);
-
+            const requests = await GetRequest(end);
+            setAllRequest(requests.allRequests);
+            setCount(requests.unseenRequestsCount);
+            console.log(requests)
             return {
-                allRequests: requests,
-                count: unseenRequestsCount,
+                allRequests: requests.allRequests,
+                count: requests.unseenRequestsCount,
             };
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -24,9 +21,6 @@ const useFetchData = () => {
         }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     return {
         allRequests,

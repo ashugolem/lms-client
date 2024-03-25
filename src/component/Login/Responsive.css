@@ -1,0 +1,30 @@
+.mb-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media only screen and (max-width: 922px) {
+    .col-md-8{
+        display: none;
+    }
+    .col-md-4{
+        width: 80%;
+    }
+}
+@media only screen and (min-width: 922px) and (max-width: 1199px) {
+  img{
+    margin-top: -20%;
+    width: 650px!important;
+    height: 650px!important;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  img{
+    margin-top: -20%;
+    width: 650px!important;
+    height: 650px!important;
+  }
+}

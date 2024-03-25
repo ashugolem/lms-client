@@ -14,6 +14,7 @@ import animationData from '../../assets/Loading/Airplane.json';
 import ActivationRequest from '../API/Signup/ActivationRequest';
 import { SignupSchema } from '../../schemas';
 import { Calendar } from 'primereact/calendar';
+import './Responsive.css'
 
 export default function Signup() {
   document.title = 'LMS - Signup';
@@ -61,7 +62,7 @@ export default function Signup() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      // validationSchema: SignupSchema,
+      validationSchema: SignupSchema,
       onSubmit: async (values, action) => {
         const signupForm = document.getElementById('signupForm')
         const OTP_form = document.getElementById('OTP_form')
@@ -79,7 +80,7 @@ export default function Signup() {
           showSuccess(`OTP has been successfully sent to ${values.email}`)
           setLoading(false)
           signupForm.style.display = "none";
-          OTP_form.style.visibility = "visible";
+          OTP_form.style.display = "block";
         }
         else if (value === 'no-match') {
           showError("Password does not match the confirm password.")
@@ -115,7 +116,7 @@ export default function Signup() {
       <div className="show" style={{ zIndex: 99999 }}>
         <Toast ref={toast} />
       </div>
-      <div className="d-flex flex-column" id="content-wrapper">
+      <div className="d-flex flex-column " id="content-wrapper">
         <div id="content">
           {loading && (<div className="container bg-white d-flex justify-content-center align-items-center" style={{ position: 'absolute', zIndex: 999, minHeight: '120vh', minWidth: '100vw' }}>
             <Lottie animationData={animationData} loop={true} />
@@ -124,10 +125,10 @@ export default function Signup() {
           <section className=" signup" >
             <div className="container pt-5" >
               <div className="row justify-content-center">
-                <div className="col-md-6 text-center" >
+                <div className="col-md-8 text-center" >
                   <img className="img-fluid w-100" src="/img/illustrations/register.svg" alt="Registration Illustration" />
                 </div>
-                <div className="col-md-2 col-xl-4 text-center text-md-start ">
+                <div className="col-md-4 col-xl-4 text-center text-md-start ">
                   <h2 className="display-6 fw-bold mb-5">
                     <span className="underline pb-1">
                       <strong style={{ color: "#211e2bd9", fontFamily: "sans-serif" }}>Sign up</strong>
@@ -137,19 +138,19 @@ export default function Signup() {
                   <form onSubmit={handleSubmit} id='signupForm'>
 
                     <div className="mb-3">
-                      <InputText placeholder='Name' value={values.name} id='name' name="name" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Name' value={values.name} id='name' name="name" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                       {errors.name && touched.name ? (
                         <p className="form-error text-danger">{errors.name}</p>
                       ) : null}
                     </div>
                     <div className="mb-3">
-                      <InputText placeholder='Email' value={values.email} id='email' name="email" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Email' value={values.email} id='email' name="email" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                       {errors.email && touched.email ? (
                         <p className="form-error text-danger">{errors.email}</p>
                       ) : null}
                     </div>
                     <div className="mb-3">
-                      <InputText placeholder='Phone' value={values.phone} id='phone' name="phone" minLength="10" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText placeholder='Phone' value={values.phone} id='phone' name="phone" minLength="10" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                       {errors.phone && touched.phone ? (
                         <p className="form-error text-danger">{errors.phone}</p>
                       ) : null}
@@ -164,30 +165,30 @@ export default function Signup() {
                     {values.role === 'Student' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} /> {errors.admissionNo && touched.admissionNo ? (
+                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} /> {errors.admissionNo && touched.admissionNo ? (
                             <p className="form-error text-danger">{errors.admissionNo}</p>
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.dob && touched.dob ? (
                             <p className="form-error text-danger">{errors.dob}</p>
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Course' value={values.course} name="course" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Course' value={values.course} name="course" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.course && touched.course ? (
                             <p className="form-error text-danger">{errors.course}</p>
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Branch' value={values.branch} name="branch" minLength="3" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Branch' value={values.branch} name="branch" minLength="3" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.branch && touched.branch ? (
                             <p className="form-error text-danger">{errors.branch}</p>
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.semester && touched.semester ? (
                             <p className="form-error text-danger">{errors.semester}</p>
                           ) : null}
@@ -197,21 +198,21 @@ export default function Signup() {
                     {values.role === 'Teacher' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Employee ID' value={values.eid} name="eid"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Employee ID' value={values.eid} name="eid"  onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.eid && touched.eid ? (
                             <p className="form-error text-danger">{errors.eid}</p>
                           ) : null}
 
                         </div>
                         <div className="mb-3">
-                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob"  onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.dob && touched.dob ? (
                             <p className="form-error text-danger">{errors.dob}</p>
                           ) : null}
 
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Designation' value={values.designation} name="designation"  onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                          <InputText placeholder='Designation' value={values.designation} name="designation"  onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.designation && touched.designation ? (
                             <p className="form-error text-danger">{errors.designation}</p>
                           ) : null}
@@ -220,13 +221,13 @@ export default function Signup() {
                       </>
                     }
                     <div className="mb-3">
-                      <Password name='password' value={values.password} placeholder='Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} />
+                      <InputText name='password' value={values.password} placeholder='Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} type='password'/>
                       {errors.password && touched.password ? (
                         <p className="form-error text-danger">{errors.password}</p>
                       ) : null}
                     </div>
                     <div className="mb-3">
-                      <Password name='password_repeat' value={values.password_repeat} placeholder='Confirm Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '40px', width: '80%' }} feedback={false} tabIndex={1} />
+                      <InputText name='password_repeat' value={values.password_repeat} placeholder='Confirm Password' onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} feedback={false} tabIndex={1} type='password'/>
                       {errors.password_repeat && touched.password_repeat ? (
                         <p className="form-error text-danger">{errors.password_repeat}</p>
                       ) : null}
@@ -257,7 +258,7 @@ export default function Signup() {
                       </Link>
                     </p>
                   </form>
-                  <form onSubmit={verification} id='OTP_form' style={{ visibility: "hidden" }}>
+                  <form onSubmit={verification} id='OTP_form' style={{ display: "none" }}>
 
                     <div className="mb-3">
                       <InputText placeholder='Enter OTP' keyfilter="int" name="OTP" onChange={(e) => { setuOTP(e.target.value) }} />
@@ -273,7 +274,7 @@ export default function Signup() {
               </div>
             </div>
           </section>
-          <NotSure heading="Difficulty in Registration" description="Contact us by Contact button else send email at support@lms.com" />
+          <NotSure heading="Facing Difficulty?" description="Connect at support@lms.com " />
         </div>
       </div>
     </>

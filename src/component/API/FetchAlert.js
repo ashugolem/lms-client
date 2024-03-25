@@ -5,29 +5,22 @@ const useFetchAlert = () => {
     const [allAlert, setAllAlert] = useState([]);
     const [count, setCount] = useState(0);
 
-    const fetchAlert = async () => {
+    const fetchAlert = async (end) => {
         try {
-            const alerts = await GetAlert();
-
-            setAllAlert(alerts);
-
-            const unseenAlertsCount = alerts.filter(request => !request.seen).length;
-            setCount(unseenAlertsCount);
+            const alerts = await GetAlert(end);
+            console.log(alerts)
+            setAllAlert(alerts.allAlert)
+            setCount(alerts.unseenAlertsCount)
 
             return {
-                allAlerts: alerts,
-                count: unseenAlertsCount,
+                allAlerts: alerts.allAlert,
+                count: alerts.unseenAlertsCount,
             };
         } catch (error) {
             console.error('Error fetching data:', error.message);
             throw error; // Re-throw the error to handle it outside if needed
         }
     };
-
-    useEffect(() => {
-        fetchAlert(); // Trigger the fetchData function when the component mounts or whenever you want
-    }, []); // The empty dependency array ensures that this effect runs once when the component mounts
-
     return {
         allAlert,
         alertCount: count,

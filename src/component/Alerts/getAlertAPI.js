@@ -1,10 +1,10 @@
-const GetAlert = async (end) => {
+const getAlerts = async (end) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_HOST}/alert/${end}`, {
+        const response = await fetch(`${import.meta.env.VITE_HOST}/request/${end}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-            }
+            },
         });
         const json = await response.json();
         return json;
@@ -13,4 +13,4 @@ const GetAlert = async (end) => {
         console.log(error.message)
     }
 }
-export default GetAlert;
+export default getAlerts;

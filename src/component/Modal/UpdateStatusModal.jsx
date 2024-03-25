@@ -80,7 +80,8 @@ const UpdateStatusModal = (props) => {
                                     <tr>
                                         <th>Book ID</th>
                                         <th>:</th>
-                                        <td >{(props.code).toLocaleString('en-US', { minimumIntegerDigits: 6, useGrouping: false })}</td>
+                                        <td >{props.code ? props.code.toLocaleString('en-US', { minimumIntegerDigits: 6, useGrouping: false }) : 'N/A'}</td>
+
                                     </tr>
                                 </thead>
                                 <tbody>

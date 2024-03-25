@@ -3,7 +3,7 @@ import { NavBar } from './component/NavBar';
 import Content from './component/Content';
 import Table from './component/Table';
 import Signup from './component/SignUp/Signup';
-import Login from './component/Login';
+import Login from './component/Login/Login';
 import Pending from './component/Pending';
 import Blocked from './component/Blocked';
 import AOS from "aos";
@@ -12,7 +12,7 @@ import ScrollTrigger from "react-scroll-trigger";
 import { useEffect } from 'react';
 import AddBooks from './component/Add-Books/AddBooks';
 import { PrimeReactProvider } from 'primereact/api';
-
+import Alerts from './component/Alerts/Alerts'
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Profile from './component/Profile/Profile';
 import { CookiesProvider } from 'react-cookie';
@@ -52,6 +52,11 @@ function App() {
                 <Route exact path="/profile" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
                     <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/request" element={
+                  <ProtectedRoute roles={['Admin']}>
+                    <Alerts/>
                   </ProtectedRoute>
                 } />
                 <Route exact path="/add-book" element={

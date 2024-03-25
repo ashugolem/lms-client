@@ -45,7 +45,7 @@ const TopNav = () => {
 
     const fetchActivationData = async () => {
         try {
-            const requests = await AllActivationRequests();
+            const requests = await AllActivationRequests(5);
             setAllUserActivationRequest(requests);
             try {
                 const response = await fetch(`${import.meta.env.VITE_HOST}/user/get-user`, {
@@ -72,8 +72,8 @@ const TopNav = () => {
     useEffect(() => {
         const fetchEverything = async () => {
             await fetchActivationData()
-            await fetchData();
-            await fetchAlert();
+            await fetchData(5);
+            await fetchAlert(5);
         }
         fetchEverything()
     }, []);
@@ -94,7 +94,7 @@ const TopNav = () => {
                                             <Link className="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown">
                                                 {ActivationRequestCount > 0 && (
                                                     <span className="badge bg-danger badge-counter">
-                                                        {ActivationRequestCount > 5 ? '5+' : ActivationRequestCount}
+                                                        {ActivationRequestCount}
                                                     </span>
                                                 )}
                                                 <i className="fas fa-user fa-fw"></i>
@@ -102,22 +102,7 @@ const TopNav = () => {
 
                                             <div className="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                                 <h6 className="dropdown-header">user activation - (click to take action)</h6>
-                                                {allUserActivationRequest
-                                                    .sort((a, b) => {
-                                                        // Custom sorting logic
-                                                        if (a.seen === b.seen) {
-                                                            // If both alerts have the same 'seen' value, sorted based on the 'time' property
-                                                            return moment(b.time).diff(a.time);
-                                                        } else if (a.seen === false) {
-                                                            // If 'seen' is false, move the alert up in the sorted order
-                                                            return -1;
-                                                        } else {
-                                                            // If 'seen' is true, move the alert down in the sorted order
-                                                            return 1;
-                                                        }
-                                                    })
-                                                    .slice(0, 5)
-                                                    .map((alert) => (
+                                                {allUserActivationRequest.map((alert) => (
                                                         <ActivationRequest
                                                             key={alert._id}
                                                             student={alert.student}
@@ -146,7 +131,7 @@ const TopNav = () => {
                                             <Link className="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown">
                                                 {alertCount > 0 && (
                                                     <span className="badge bg-danger badge-counter">
-                                                        {alertCount > 5 ? '5+' : alertCount}
+                                                        {alertCount}
                                                     </span>
                                                 )}
                                                 <i className="fas fa-bell fa-fw"></i>
@@ -154,22 +139,7 @@ const TopNav = () => {
 
                                             <div className="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                                 <h6 className="dropdown-header">alerts center</h6>
-                                                {allAlert
-                                                    .sort((a, b) => {
-                                                        // Custom sorting logic
-                                                        if (a.seen === b.seen) {
-                                                            // If both alerts have the same 'seen' value, maintain the original order
-                                                            return 0;
-                                                        } else if (a.seen === false) {
-                                                            // If 'seen' is false, move the alert up in the sorted order
-                                                            return -1;
-                                                        } else {
-                                                            // If 'seen' is true, move the alert down in the sorted order
-                                                            return 1;
-                                                        }
-                                                    })
-                                                    .slice(0, 5).map((alert) => (
-
+                                                {allAlert.map((alert) => (
                                                         <Alert
                                                             key={alert._id}
                                                             _id={alert._id}
@@ -198,7 +168,7 @@ const TopNav = () => {
                                             <a className="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" >
                                                 {count > 0 && (
                                                     <span className="badge bg-danger badge-counter">
-                                                        {count > 5 ? '5+' : count}
+                                                        {count}
                                                     </span>)}
                                                 <i className="fas fa-envelope fa-fw"></i>
                                             </a>
@@ -208,20 +178,7 @@ const TopNav = () => {
                                                 <div className="container text-center text-danger">
                                                     {allRequests.length === 0 && "No request to Display"}
                                                 </div>
-                                                {allRequests.sort((a, b) => {
-                                                    // Custom sorting logic
-                                                    if (a.seen === b.seen) {
-                                                        // If both alerts have the same 'seen' value, maintain the original order
-                                                        return 0;
-                                                    } else if (a.seen === false) {
-                                                        // If 'seen' is false, move the alert up in the sorted order
-                                                        return -1;
-                                                    } else {
-                                                        // If 'seen' is true, move the alert down in the sorted order
-                                                        return 1;
-                                                    }
-                                                })
-                                                    .slice(0, 5).map((request) => (
+                                                {allRequests.map((request) => (
 
                                                         <Request
                                                             key={request._id}
@@ -245,7 +202,7 @@ const TopNav = () => {
                                                         />
                                                     ))}
 
-                                                <Link className="dropdown-item text-center small text-gray-500" to={'/alert'}>Show All Alerts</Link>
+                                                <Link className="dropdown-item text-center small text-gray-500" to={'/request'}>Show All Requests</Link>
                                             </div>
                                         </div>
                                         <div className="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
