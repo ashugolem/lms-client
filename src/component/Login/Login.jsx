@@ -82,7 +82,7 @@ function Login() {
                 <div className="row justify-content-center">
                   <div className="col-md-8 text-center">
                     <img
-                      className="img-fluid w-100"
+                      className="img-fluid w-100 responsive"
                       src="/img/illustrations/login.svg"
                       alt="Login Illustration"
                     />
@@ -108,7 +108,7 @@ function Login() {
                           autoComplete='true'
                         />
                         {errors.email && touched.email ? (
-                          <p className="form-error text-danger">{errors.email}</p>
+                          <p className="form-error text-start text-danger">{errors.email}</p>
                         ) : null}
                       </div>
                       <div className="mb-3">
@@ -124,7 +124,7 @@ function Login() {
                           autoComplete='true'
                         />
                         {errors.password && touched.password ? (
-                          <p className="form-error text-danger">{errors.password}</p>
+                          <p className="form-error text-start text-danger">{errors.password}</p>
                         ) : null}
                       </div>
                       <div className="mb-5 ">
@@ -143,7 +143,7 @@ function Login() {
                       </p>
                       <p className="text-muted">Dont Have an account?
 
-                        <Link to="/signup">{"     "}
+                        <Link to="/register">{"     "}
                           <span className="underline pb-1">
                             <strong>Signup</strong>
                           </span>

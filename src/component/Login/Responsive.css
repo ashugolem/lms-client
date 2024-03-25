@@ -1,11 +1,21 @@
 .mb-3{
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 
 
+@media only screen and (max-width: 1922px) {
+    .col-md-4, form .mb-5{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+}
 @media only screen and (max-width: 922px) {
     .display-6{
         font-size: 40px;
@@ -14,7 +24,10 @@
         display: none;
     }
     .col-md-4{
-        width: 80%;
+        width: 100%;
+    }
+     #signupForm {
+        width: 100%;
     }
 }
 @media only screen and (min-width: 922px) and (max-width: 1199px) {
@@ -23,6 +36,9 @@
     width: 650px!important;
     height: 650px!important;
   }
+   #signupForm {
+        width: 100%;
+    }
 }
 @media only screen and (min-width: 1200px) {
   .responsive img{
@@ -30,4 +46,7 @@
     width: 650px!important;
     height: 650px!important;
   }
+   #signupForm {
+        width: 100%;
+    }
 }
