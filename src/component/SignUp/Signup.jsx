@@ -126,7 +126,7 @@ export default function Signup() {
             <div className="container pt-5" >
               <div className="row justify-content-center">
                 <div className="col-md-8 text-center" >
-                  <img className="img-fluid w-100" src="/img/illustrations/register.svg" alt="Registration Illustration" />
+                  <img className="img-fluid w-100 responsive " src="/img/illustrations/register.svg" alt="Registration Illustration" />
                 </div>
                 <div className="col-md-4 col-xl-4 text-center text-md-start ">
                   <h2 className="display-6 fw-bold mb-5">
