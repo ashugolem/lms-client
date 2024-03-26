@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown } from 'primereact/dropdown';
-import { Password } from 'primereact/password';
 import NotSure from '../NotSure';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
@@ -52,7 +51,6 @@ export default function Signup() {
     eid: '',
     designation: '',
     admissionNo: '',
-    dob: '',
     course: '',
     branch: '',
     semester: '',
@@ -64,6 +62,7 @@ export default function Signup() {
       initialValues,
       validationSchema: SignupSchema,
       onSubmit: async (values, action) => {
+        console.log(rOTP)
         const signupForm = document.getElementById('signupForm')
         const OTP_form = document.getElementById('OTP_form')
         const value = await CheckUser(values);
@@ -170,12 +169,6 @@ export default function Signup() {
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
-                          {errors.dob && touched.dob ? (
-                            <p className="form-error text-danger">{errors.dob}</p>
-                          ) : null}
-                        </div>
-                        <div className="mb-3">
                           <InputText placeholder='Course' value={values.course} name="course" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.course && touched.course ? (
                             <p className="form-error text-danger">{errors.course}</p>
@@ -201,13 +194,6 @@ export default function Signup() {
                           <InputText placeholder='Employee ID' value={values.eid} name="eid"  onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.eid && touched.eid ? (
                             <p className="form-error text-danger">{errors.eid}</p>
-                          ) : null}
-
-                        </div>
-                        <div className="mb-3">
-                          <Calendar placeholder='Date of Birth' maxDate={maxDate} value={values.dob} name="dob"  onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
-                          {errors.dob && touched.dob ? (
-                            <p className="form-error text-danger">{errors.dob}</p>
                           ) : null}
 
                         </div>

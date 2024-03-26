@@ -1,9 +1,6 @@
 import React, { useRef } from 'react'
 import TopNav from './TopNav/TopNav'
-import ChartComponent from './ChartComponent'
 import { Toast } from 'primereact/toast';
-import FineSettings from './Admin/FineSettings'
-import DepartmentWiseValues from './Admin/DepartmentWiseValues'
 import Alert from './Admin/Alert'
 import Members from './Admin/Members'
 import CountContainer from './Admin/CountContainer'
@@ -37,25 +34,13 @@ const Content = () => {
               {/* Pending Request Count For Admin */}
               <CountContainer count={18} color={'#9f86c0'} icon={'bell'} header={'Pending Requests'} />
             </div>
-            <div className="row row-1250">
-              <div className="col-md-6">
-                <div className="card shadow mb-4" style={{ height: '95%' }}>
-                  <div className="card-header d-flex justify-content-between align-items-center">
-                    <h6 className="text-primary fw-bold m-0">Yearly Fine Stats</h6>
-                  </div>
-                  <div className="card-body py-5 h-100">
-                    <ChartComponent type={true} />
-                  </div>
-                </div>
-              </div>
-              <Activities />
-
-            </div>
             <div className="row row-1200 d-flex justify-content-between">
               <Members />
+            </div>
+            <div className="row row-1000">              
+              <Activities />
               <Alert />
             </div>
-            <DepartmentWiseValues />
           </div>
         </div>
       </div >

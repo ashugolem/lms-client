@@ -49,6 +49,11 @@ function App() {
                     <Table />
                   </ProtectedRoute>
                 } />
+                <Route exact path="/" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <Table />
+                  </ProtectedRoute>
+                } />
                 <Route exact path="/profile" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
                     <Profile />

@@ -95,7 +95,7 @@ function Login() {
                       </span>
                     </h2>
                     <form onSubmit={handleSubmit} >
-                      <div className="mb-3">
+                      <div className="mb-3 login">
                         <InputText
                           style={{ height: '50px', width: '80%' }}
                           className="shadow form-control"
@@ -111,7 +111,7 @@ function Login() {
                           <p className="form-error text-start text-danger">{errors.email}</p>
                         ) : null}
                       </div>
-                      <div className="mb-3">
+                      <div className="mb-3 login login">
                         <InputText
                           className="shadow form-control"
                           style={{ height: '50px', width: '80%' }}

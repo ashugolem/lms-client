@@ -1,43 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import FineSettings from './FineSettings'
 
 export default function Alert() {
-  return (
-      <div className=" col-md-3 card shadow mb-4" style={{ minHeight: '97%' }}>
-          <div className="card-header text-center py-3 bg-primary text-white">
-              <h6 className="text-uppercase fw-bold m-0">Alerts</h6>
-          </div>
-          <ul className="list-group list-group-flush mt-3">
-              <li className="list-group-item">
-                  <div className="row align-items-center no-gutters">
-                      <div className="col me-2">
-                          <h6 className="mb-0"><strong>Lunch meeting</strong></h6><span className="text-xs">10:30 AM</span>
-                      </div>
-                      <div className="col-auto">
-                          <div className="form-check"><input className="form-check-input" type="checkbox" id="formCheck-1" /><label className="form-check-label" htmlFor="formCheck-1"></label></div>
-                      </div>
-                  </div>
-              </li>
-              <li className="list-group-item">
-                  <div className="row align-items-center no-gutters">
-                      <div className="col me-2">
-                          <h6 className="mb-0"><strong>Lunch meeting</strong></h6><span className="text-xs">11:30 AM</span>
-                      </div>
-                      <div className="col-auto">
-                          <div className="form-check"><input className="form-check-input" type="checkbox" id="formCheck-2" /><label className="form-check-label" htmlFor="formCheck-2"></label></div>
-                      </div>
-                  </div>
-              </li>
-              <li className="list-group-item">
-                  <div className="row align-items-center no-gutters">
-                      <div className="col me-2">
-                          <h6 className="mb-0"><strong>Lunch meeting</strong></h6><span className="text-xs">12:30 AM</span>
-                      </div>
-                      <div className="col-auto">
-                          <div className="form-check"><input className="form-check-input" type="checkbox" id="formCheck-3" /><label className="form-check-label" htmlFor="formCheck-3"></label></div>
-                      </div>
-                  </div>
-              </li>
-          </ul>
-      </div>
-  )
+    const [show, setShow] = useState(false)
+    return (
+        <div className="col-md-3" style={{ width: "41%" }}>
+            <div className="card card-status shadow" style={{ height: '95%' }}>
+                <div className="card-header d-flex justify-content-between fw-bold text-primary font-weight-bold w-100">
+                    <div className="d-flex align-items-center">
+                        Fine Parameters
+                    </div>
+                    <div className="flex justify-content-center">
+                        <button
+                            className="btn btn-primary shadow px-4 py-2 mx-2"
+                            style={{ borderRadius: "0.6rem" }}
+                            onClick={() => setShow(true)}
+                        >
+                            <i className="fa-solid fa-pencil"></i>
+                        </button>
+                    </div>
+                </div>
+                <div className="container row h-100" >
+                    <div className="container d-flex align-items-center justify-content-center flex-column">
+                        <FineSettings show={show} setShow={setShow} />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    )
 }

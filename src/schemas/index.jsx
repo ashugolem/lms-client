@@ -19,19 +19,32 @@ export const FineSchema = Yup.object({
     finePerDay: Yup.number().required('Enter the daily fine amount'),
     deadline: Yup.number().required('Enter the deadline'),
 })
+export const ChangePasswordSchema = Yup.object({
+    oldPassword: Yup.number().min(4, "Minimum Length should must be 4").required('Enter the Old Password'),
+    password: Yup.string().min(4, "Minimum Length should must be 4").required('Password is required'),
+    confirmPassword: Yup.string().label('Confirm password').required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+})
 
+
+export const AddUserSchema = Yup.object({
+    name: Yup.string().min(3).required('Name is required'),
+    phone: Yup.string().min(10, "Minimum Length should must be 10").required('Phone is required'),
+    email: Yup.string().email().required('Email is required'),
+    role: Yup.string().required('Role is required'),
+    admissionNo: Yup.string().min(3).required('Admission Number is required'),
+    course: Yup.string().required('Course is required'),
+    branch: Yup.string().min(3).required('Branch is required'),
+    semester: Yup.string().required('Semester is required'),
+})
 export const SignupSchema = Yup.object({
     name: Yup.string().min(3).required('Name is required'),
     phone: Yup.string().min(10, "Minimum Length should must be 10").required('Phone is required'),
     email: Yup.string().email().required('Email is required'),
     role: Yup.string().required('Role is required'),
-    // eid: Yup.string().min(3).required('Employee ID is required'),
-    // designation: Yup.string().min(3).required('Designation is required'),
     admissionNo: Yup.string().min(3).required('Admission Number is required'),
-    dob: Yup.string().required('Date of Birth is required'),
     course: Yup.string().required('Course is required'),
     branch: Yup.string().min(3).required('Branch is required'),
     semester: Yup.string().required('Semester is required'),
     password: Yup.string().min(5, "Minimum Length should must be 5").required('Password is required'),
-    password_repeat: Yup.string().min(5,"Minimum Length should must be 5").required('Confirm Password is required'),
+    password_repeat: Yup.string().label('Confirm password').required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
 })

@@ -3,6 +3,8 @@ import GetFineApi from '../API/Fine';
 import { InputText } from 'primereact/inputtext';
 import FineUpdate from '../Modal/FineUpdateModal';
 import { Toast } from 'primereact/toast';
+import moment from 'moment';
+import './Fine.css'
 
 export default function FineSettings(props) {
     const [fine, setFine] = useState({ finePerDay: '', deadline: '' })
@@ -18,7 +20,7 @@ export default function FineSettings(props) {
         setFine(Fine.fine);
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
     }
 
@@ -35,32 +37,40 @@ export default function FineSettings(props) {
                 onClose={() => {
                     props.setShow(false)
                 }}
-                showSuccess = {showSuccess}
-                showError = {showError}
-                fine = {fine}
+                showSuccess={showSuccess}
+                showError={showError}
+                fine={fine}
                 setFine={setFine}
             />
-            <form onSubmit={handleSubmit} className='d-flex align-items-center flex-column justify-content-center' style={{ border: '' }}>
-                <div className="mb-3 ">
-                    <label htmlFor="finePerDay" className='mt-3'>Fine Per Day</label>
-                    <InputText
-                        className="shadow"
-                        name="finePerDay"
-                        value={'Rupees ' + fine.finePerDay + ' per Day'}
-                        placeholder="Fine Per Day"
-                        autoComplete='true'
-                        disabled={true}
-                    />
-                    <label htmlFor="deadline" className='mt-2'>Deadline</label>
-                    <InputText
-                        className="shadow"
-                        name="deadline"
-                        value={fine.deadline + ' Days'}
-                        placeholder={fine.deadline}
-                        disabled={true}
-                    />
+            <form onSubmit={handleSubmit} className='d-flex align-items-center flex-column justify-content-center'>
+                <div className="mb-3">
+                    <div className="container d-flex flex-column">
+                        <label htmlFor="finePerDay" className='text-center'>Fine Per Day</label>
+                        <InputText
+                            className="shadow"
+                            name="finePerDay"
+                            value={'Rupees ' + fine.finePerDay + ' per Day'}
+                            placeholder="Fine Per Day"
+                            autoComplete='true'
+                            disabled={true}
+                        />
+                    </div>
+                    <div className="container mt-2 d-flex flex-column">
+                        <label htmlFor="deadline" className='mt-2 text-center'>Deadline</label>
+                        <InputText
+                            className="shadow"
+                            name="deadline"
+                            value={fine.deadline + ' Days'}
+                            placeholder={fine.deadline}
+                            disabled={true}
+                        />
+                    </div>
                 </div>
             </form>
+            <div className="card-header bg-primary updated rounded py-3">
+                <h6 className="text-white w-100 text-center fw-bold m-0 updated">Last Updated : {moment(fine.time).format('DD-MM-YYYY')}</h6>
+                <h6 className="text-white mt-1 w-100 text-center fw-bold m-0 updated">Time : {moment(fine.time).format('HH:MM:SS')}</h6>
+            </div>
 
         </>
     )

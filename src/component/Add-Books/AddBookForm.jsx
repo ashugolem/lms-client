@@ -10,7 +10,7 @@ import CreateAlert from '../API/CreateAlert';
 
 
 export default function AddBookForm() {
-    const initialValues = { title: '', isbn: '', subject: '', author: '', publishedOn: Date.now(), stock: '', price: '', selfNo: '' }
+    const initialValues = { title: '', isbn: '', subject: '', author: '', publishedOn: new Date, stock: '', price: '', selfNo: '' }
 
     const toast = useRef(null);
 
@@ -82,7 +82,7 @@ export default function AddBookForm() {
                             ) : null}
                         </div>
                         <div className="mb-3 mt-4">
-                            <Calendar onBlur={handleBlur} placeholder='Enter Publishon' onChange={handleChange} dateFormat="yy/mm/dd" showIcon style={{ width: '80%' }} value={values.publishedOn} name='publishedOn' />
+                            <Calendar onBlur={handleBlur}  placeholder='Enter Publishon' onChange={handleChange} showIcon style={{ width: '80%' }} value={values.publishedOn} name='publishedOn' />
                             {errors.publishedOn && touched.publishedOn ? (
                                 <p className="form-error text-danger">Date is required</p>
                             ) : null}
