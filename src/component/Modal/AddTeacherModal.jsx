@@ -42,9 +42,9 @@ const AddTeacher = (props) => {
                 try {
                     console.log(values)
                     setLoading(true)
-                    const value = await CheckUser(values);
+                    const value = await CheckUser({ ...values, password: "123456", password_repeat: "123456" });
                     if (value === 'exists') {
-                        showError("User already exists!")
+                        props.showError("User already exists!")
                         setTimeout(() => {
                             document.getElementById('add-user-form').reset();
                         }, 1500);

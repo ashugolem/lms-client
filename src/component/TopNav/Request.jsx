@@ -2,18 +2,11 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment/moment'
 import UpdateStatusModal from '../Modal/UpdateStatusModal'
-import { Toast } from 'primereact/toast'
 
 export default function Request(props) {
     const [indicator, setIndicator] = useState(props.seen)
     const [modalVisible, setModalVisible] = useState(false);
-    const toast = useRef(null);
-    const showError = (errorMsg) => {
-        toast.current.show({ severity: 'error', summary: 'Error', detail: errorMsg, life: 3000 });
-    }
-    const showSuccess = (msg) => {
-        toast.current.show({ severity: 'success', summary: 'Success', detail: msg, life: 3000 });
-    }
+    
     const handleRead = async () => {
         try {
             setModalVisible(true);
@@ -42,6 +35,7 @@ export default function Request(props) {
                 show={modalVisible}
                 onClose={() => setModalVisible(false)}
                 name={props.name}
+                status={props.status}
                 role={props.role}
                 action={props.type}
                 bookName={props.bookName}
@@ -52,10 +46,9 @@ export default function Request(props) {
                 eid={props.eid}
                 code={props.code}
                 selfNo={props.selfNo}
-                showError={showError}
-                showSuccess={showSuccess}
+                showError={props.showError}
+                showSuccess={props.showSuccess}
             />
-            <Toast ref={toast} />
             <Link className="dropdown-item d-flex align-items-center" onClick={handleRead}>
                 <div className="dropdown-list-image me-3">
                     {
@@ -68,13 +61,13 @@ export default function Request(props) {
                     <div className={`bg-${indicator ? 'success' : 'danger'} status-indicator`}></div>
                 </div>
                 <div className={`fw-${!indicator ? 'bold' : ''}`}>
-                    <div className="text-truncate" data-aos="zoom-out"
+                    <div className="text-truncate w-100" data-aos="zoom-out"
                         id='head'
                         data-aos-duration="950"
                         data-aos-delay="300"
                     >
-                        {/* <p className='text-end w-1z0'>Action Required</p> */}
-                        {props.type === 'Lent' ? <span>New Book lent request</span> : <span>New Book Submission request</span>}
+                        <span className='text-end text-primary'>{props.status === "Accepted" ? "Issued" : (props.status === "Rejected" ? "Declined" : props.type === 'Lent' ? <span className='text-warning'>New Book lent request</span> : <span className='text-warning'>New Book Submission request</span>)}</span>
+                        {/* {props.type === 'Lent' ? <span>New Book lent request</span> : <span>New Book Submission request</span>} */}
                     </div>
                     <p className="small text-gray-500 mb-0">{props.name} </p>
                     <p className="small text-gray-500 mb-0">{`${(moment(props.time).format('hh:mm, DD-MM-YYYY'))}`}</p>

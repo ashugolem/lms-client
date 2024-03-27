@@ -12,7 +12,7 @@ const UpdateStatusModal = (props) => {
     const [loading, setLoading] = useState(false)
 
     const handleReject = async () => {
-        const response = ChangeStatus('Rejected', props._id);
+        const response = await ChangeStatus('Rejected', props._id);
         if (response.success) {
             setLoading(true)
             await fetchData()
@@ -26,10 +26,10 @@ const UpdateStatusModal = (props) => {
     };
 
     const handleAccept = async () => {
-        const response = ChangeStatus('Accepted', props._id);
+        const response = await ChangeStatus('Accepted', props._id);
         if (response.success) {
-            IssueBook(props.user, props.role, props.book);
             setLoading(true)
+            await IssueBook(props.user, props.role, props.book);
             await fetchData()
             props.showSuccess(response.msg)
             setLoading(false)
@@ -112,13 +112,13 @@ const UpdateStatusModal = (props) => {
                     </>}
             </Modal.Body>
             <Modal.Footer>
-                <h6 className='text-end text-warning'>Take necessary action</h6>
+                <h6 className='text-end text-warning'>{props.status === "Requested" ? <span>Take necessary action</span> : (props.status === "Accepted" ? <span className='text-success'>Book was issued</span> : <span className='text-danger'>Book request was declined</span>)}</h6>
                 <div className="button d-flex justify-content-center">
                     <Button variant={props.isactiontaken ? "primary" : "secondary"} onClick={props.onClose}>
                         Back
                     </Button>
                     {
-                        !props.isactiontaken &&
+                        props.status==="Requested" &&
                         <>
                             <Button variant="primary" onClick={handleAccept}>
                                 Issue

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GetAlert from './GetAlert';
 
 const useFetchAlert = () => {
@@ -8,7 +8,6 @@ const useFetchAlert = () => {
     const fetchAlert = async (end) => {
         try {
             const alerts = await GetAlert(end);
-            console.log(alerts)
             setAllAlert(alerts.allAlert)
             setCount(alerts.unseenAlertsCount)
 

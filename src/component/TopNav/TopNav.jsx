@@ -28,8 +28,9 @@ const TopNav = () => {
     const showSuccess = (msg) => {
         toast.current.show({ severity: 'success', summary: 'Success', detail: msg, life: 3000 });
     }
-    const { allRequests, setCount, count, fetchData } = useFetchData();
 
+
+    const { allRequests, setCount, count, fetchData } = useFetchData();
     const { allAlert, setAlertCount, setAllAlert, alertCount, fetchAlert } = useFetchAlert();
     // const { allUserActivationRequest, ActivationRequestCount, setActivationRequestCount, fetchActivationData } = FetchUserActivationRequest
     const dispatch = useDispatch()
@@ -45,8 +46,11 @@ const TopNav = () => {
 
     const fetchActivationData = async () => {
         try {
-            const requests = await AllActivationRequests(5);
-            setAllUserActivationRequest(requests);
+            const response = await AllActivationRequests(5);
+            if (response.success) {
+                setAllUserActivationRequest(response.requests);
+                setActivationRequestCount(response.unseenRequestCount);
+            }
             try {
                 const response = await fetch(`${import.meta.env.VITE_HOST}/user/get-user`, {
                     method: "POST",
@@ -61,9 +65,6 @@ const TopNav = () => {
             } catch (error) {
                 console.log(error.message)
             }
-            // console.log("allUserActivationRequest", allUserActivationRequest[4].eid)
-            const unseenRequestCount = requests.filter(request => !request.seen).length;
-            setActivationRequestCount(unseenRequestCount);
         } catch (error) {
             console.error('Error fetching data:', error.message);
             throw error;
@@ -71,9 +72,13 @@ const TopNav = () => {
     };
     useEffect(() => {
         const fetchEverything = async () => {
-            await fetchActivationData()
-            await fetchData(5);
-            await fetchAlert(5);
+            try {
+                await fetchActivationData()
+                await fetchData(5);
+                await fetchAlert(5);
+            } catch (error) {
+                console.log(error);
+            }
         }
         fetchEverything()
     }, []);
@@ -102,27 +107,29 @@ const TopNav = () => {
 
                                             <div className="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                                 <h6 className="dropdown-header">user activation - (click to take action)</h6>
-                                                {allUserActivationRequest.map((alert) => (
-                                                        <ActivationRequest
-                                                            key={alert._id}
-                                                            student={alert.student}
-                                                            teacher={alert.teacher}
-                                                            _id={alert._id}
-                                                            showError={showError}
-                                                            showSuccess={showSuccess}
-                                                            status={alert.status}
-                                                            name={alert.userName}
-                                                            user={alert.user}
-                                                            time={alert.time}
-                                                            seen={alert.seen}
-                                                            isactiontaken={alert.isactiontaken}
-                                                            set={setActivationRequestCount}
-                                                            type={alert.type}
-                                                            count={ActivationRequestCount}
-                                                            message={alert.message}
-                                                        />
-                                                    ))}
-                                                <Link className="dropdown-item text-center small text-gray-500" >Show All Pending Request</Link>
+                                                {ActivationRequestCount > 0 ? allUserActivationRequest.map((alert) => (
+                                                    <ActivationRequest
+                                                        key={alert._id}
+                                                        student={alert.student}
+                                                        teacher={alert.teacher}
+                                                        _id={alert._id}
+                                                        showError={showError}
+                                                        showSuccess={showSuccess}
+                                                        status={alert.status}
+                                                        name={alert.userName}
+                                                        user={alert.user}
+                                                        time={alert.time}
+                                                        seen={alert.seen}
+                                                        isactiontaken={alert.isactiontaken}
+                                                        set={setActivationRequestCount}
+                                                        type={alert.type}
+                                                        count={ActivationRequestCount}
+                                                        message={alert.message}
+                                                    />
+                                                )) :
+                                                    <p className='text-center text-gray-500 mt-2'>No Activations Requests</p>
+                                                }
+                                                {ActivationRequestCount > 0 && <Link className="dropdown-item text-center small text-gray-500" >Show All Pending Request</Link>}
                                             </div>
                                         </div>
                                     </li>
@@ -140,25 +147,27 @@ const TopNav = () => {
                                             <div className="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                                 <h6 className="dropdown-header">alerts center</h6>
                                                 {allAlert.map((alert) => (
-                                                        <Alert
-                                                            key={alert._id}
-                                                            _id={alert._id}
-                                                            stock={alert.stock}
-                                                            allAlert={allAlert}
-                                                            name={alert.userName}
-                                                            book={alert.bookName}
-                                                            user={alert.user}
-                                                            time={alert.time}
-                                                            seen={alert.seen}
-                                                            selfNo={alert.selfNo}
-                                                            code={alert.code}
-                                                            set={setAllAlert}
-                                                            reference={alert.reference}
-                                                            count={alertCount}
-                                                            message={alert.message}
-                                                            setAlertCount={setAlertCount}
-                                                        />
-                                                    ))}
+                                                    <Alert
+                                                        key={alert._id}
+                                                        _id={alert._id}
+                                                        stock={alert.stock}
+                                                        allAlert={allAlert}
+                                                        name={alert.userName}
+                                                        book={alert.bookName}
+                                                        user={alert.user}
+                                                        showError={showError}
+                                                        showSuccess={showSuccess}
+                                                        time={alert.time}
+                                                        seen={alert.seen}
+                                                        selfNo={alert.selfNo}
+                                                        code={alert.code}
+                                                        set={setAllAlert}
+                                                        reference={alert.reference}
+                                                        count={alertCount}
+                                                        message={alert.message}
+                                                        setAlertCount={setAlertCount}
+                                                    />
+                                                ))}
                                                 <Link className="dropdown-item text-center small text-gray-500" >Show All Alerts</Link>
                                             </div>
                                         </div>
@@ -179,27 +188,30 @@ const TopNav = () => {
                                                     {allRequests.length === 0 && "No request to Display"}
                                                 </div>
                                                 {allRequests.map((request) => (
-                                                        <Request
-                                                            key={request._id}
-                                                            _id={request._id}
-                                                            profile={request.profile}
-                                                            name={request.userName}
-                                                            user={request.user}
-                                                            role={request.role}
-                                                            book={request.book}
-                                                            bookName={request.bookName}
-                                                            time={request.time}
-                                                            seen={request.seen}
-                                                            type={request.type}
-                                                            isactiontaken={request.isactiontaken}
-                                                            admissionNo={request.studentAdmNo}
-                                                            eid={request.eid}
-                                                            code={request.bookCode}
-                                                            count={count}
-                                                            selfNo={request.selfNo}
-                                                            setCount={setCount}
-                                                        />
-                                                    ))}
+                                                    <Request
+                                                        key={request._id}
+                                                        _id={request._id}
+                                                        profile={request.profile}
+                                                        name={request.userName}
+                                                        status={request.status}
+                                                        user={request.user}
+                                                        role={request.role}
+                                                        book={request.book}
+                                                        bookName={request.bookName}
+                                                        showError={showError}
+                                                        showSuccess={showSuccess}
+                                                        time={request.time}
+                                                        seen={request.seen}
+                                                        type={request.type}
+                                                        isactiontaken={request.isactiontaken}
+                                                        admissionNo={request.studentAdmNo}
+                                                        eid={request.eid}
+                                                        code={request.bookCode}
+                                                        count={count}
+                                                        selfNo={request.selfNo}
+                                                        setCount={setCount}
+                                                    />
+                                                ))}
 
                                                 <Link className="dropdown-item text-center small text-gray-500" to={'/request'}>Show All Requests</Link>
                                             </div>

@@ -7,7 +7,6 @@ const AllActivationRequests = async (end) => {
             }
         });
         const json = await response.json();
-        console.log(json)
         return json;
 
     } catch (error) {

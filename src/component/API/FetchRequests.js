@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GetRequest from './GetRequest';
 
 const useFetchData = () => {
@@ -7,10 +7,9 @@ const useFetchData = () => {
 
     const fetchData = async (end) => {
         try {
-            const requests = await GetRequest(end);
+            const requests = await GetRequest(5);
             setAllRequest(requests.allRequests);
             setCount(requests.unseenRequestsCount);
-            console.log(requests)
             return {
                 allRequests: requests.allRequests,
                 count: requests.unseenRequestsCount,

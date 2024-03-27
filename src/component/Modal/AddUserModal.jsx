@@ -28,7 +28,6 @@ const AddUser = (props) => {
         course: '',
         branch: '',
         semester: '',
-        password: "123456"
     }
     const [loading, setLoading] = useState(false)
     const submit = useRef(null);
@@ -40,12 +39,9 @@ const AddUser = (props) => {
             onSubmit: async (values, action) => {
                 try {
                     setLoading(true)
-                    const value = await CheckUser(values);
+                    const value = await CheckUser({ ...values, password: "123456", password_repeat: "123456"});
                     if (value === 'exists') {
                         props.showError("User already exists!")
-                        setTimeout(() => {
-                            document.getElementById('add-user-form').reset();
-                        }, 1500);
                     }
                     else if (value === 'not-exists') {
                         setLoading(true)
@@ -93,7 +89,7 @@ const AddUser = (props) => {
                             <div className="mb-3">
                                 <InputText placeholder='Name' value={values.name} id='name' name="name" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                                 {errors.name && touched.name ? (
-                                    <p className="form-error text-danger">{errors.name}</p>
+                                    <p className="form-error text-danger">{errors.name}</p> 
                                 ) : null}
                             </div>
                             <div className="mb-3">

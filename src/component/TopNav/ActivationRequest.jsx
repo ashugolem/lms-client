@@ -94,10 +94,10 @@ export default function ActivationRequest(props) {
                             status === "Declined" &&
                             <span className="small fw-bold text-danger">Declined</span>
                         }
-                        {/* {
+                        {
                             props.status === "Approved" &&
-                            <span className="small fw-bold text-primary">Approved</span>
-                        } */}
+                            <span className="small fw-bold text-success">Approved</span>
+                        }
 
                     </div>
                     <p>{message}</p>
