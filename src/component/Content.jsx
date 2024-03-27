@@ -17,9 +17,6 @@ const Content = () => {
           <TopNav />
           <Toast ref={toast} />
           <div className="container-fluid">
-            <div className="d-sm-flex justify-content-end align-items-end mb-4 px-2">
-              <a className="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i className="fas fa-download fa-sm text-white-100"></i>&nbsp;Generate Report</a>
-            </div>
             <div className="row-50">
 
               {/* Total Books in the library */}

@@ -43,9 +43,10 @@ export const NavBar = () => {
               </>}
             {role === "Student" &&
               <>
-                <NavLink icon="fas fa-book" path="/table" name="Lent Book" />
-                <NavLink icon="fas fa-book" path="/table" name="Submit Book" />
+                <NavLink icon="fas fa-book" path="/books" name="Library" />
+                <NavLink icon="fas fa-book" path="/submit" name="Submit Book" />
                 <NavLink icon="fas fa-table" path="/fine" name="Fine" />
+                <NavLink icon="fas fa-table" path="/transaction" name="Book Requests" />
               </>}
             {(role === "Admin" || role === "Teacher") &&
               <>

@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import getTransaction from './TransactionAPI'
-import { OrderList } from 'primereact/orderlist';
 import Lottie from 'lottie-react';
 import animationData from '../../assets/Loading/Airplane.json'
 import TopNav from '../TopNav/TopNav';
 import moment from 'moment/moment';
+import { ScrollPanel } from 'primereact/scrollpanel';
 export default function BookTransaction() {
 
     const [Transactions, setTransactions] = useState([]); // Array to store the transactions made by the user
-    const  [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [count, setCount] = useState(0)
     const getTransactions = async () => {
         setLoading(true)
-        const response = await getTransaction();
-        setLoading(false)
-        setTransactions(response);
+        try {
+            const response = await getTransaction();
+            console.log(response)
+            if (response.success) {
+                setTransactions(response.transactions);
+                setCount(response.count)
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -27,11 +37,26 @@ export default function BookTransaction() {
                 <div className="flex-1 flex flex-column w-100 px-3 ">
                     <h4 className="fw-bold text-primary " >{transaction.bookName}</h4>
                     <div className="flex align-items-center gap-2 ">
-                        <i class="fa-solid fa-calendar-days text-sm "></i>
-                        <span className='px-2'>Issue Date - {moment(transaction.date).format('DD-MM-YYYY')}</span>
+                        <i className="fa-solid fa-calendar-days text-sm "></i>
+                        <span className='px-2'>Requested On - {moment(transaction.time).format('DD-MM-YYYY')}</span>
                     </div>
                 </div>
-                <span className="font-bold text-end w-100 fw-bold align-middle">Status - {transaction.isReturned ? 'Returned' : "Borrowed"}</span>
+                {transaction.issueDate 
+                ? 
+                <div className="flex align-items-center text-end gap-2 w-100">
+                        <i className="fa-solid text-success fa-calendar-days text-sm "></i>
+                    <span className='px-2 text-success'>Issue Date - {moment(transaction.issueDate).format('DD-MM-YYYY')}</span>
+                </div>
+                :
+                <div className="flex align-items-center text-end gap-2 w-100">
+                    {/* <i className="fa-solid fa-calendar-days text-sm "></i> */}
+                    <span className='px-2 text-warning'>Request sent to Admin</span>
+                </div>
+
+            }
+                <div className="flex align-items-center text-end gap-2 w-100">
+                    <span className="font-bold text-end w-100 fw-bold align-middle">Status - {transaction.issueDate ? "Issued" : (transaction.isReturned ? 'Returned' : "Pending")}</span>
+                </div>
             </div>
         );
     };
@@ -57,10 +82,21 @@ export default function BookTransaction() {
                     <div id="content">
                         <>
                             <TopNav />
-                            <div className="container-fluid">
-                                <div className="card xl:flex xl:justify-content-center">
-                                    <OrderList dataKey="id" value={Transactions} onChange={(e) => setTransactions(e.value)} itemTemplate={itemTemplate} header="Book Transactions"></OrderList>
-                                </div>
+                            {!(count===0) && <h2 className="text-primary text-center fw-bold">Book Request Records</h2>}
+                            <div className="container-fluid h-100 mt-5">
+                                {count !== 0
+                                    ?
+                                    <div className="card xl:flex xl:justify-content-center">
+                                        {/* <OrderList dataKey="id" value={Transactions} onChange={(e) => setTransactions(e.value)} itemTemplate={itemTemplate} header="Book Transactions"></OrderList> */}
+                                        <ScrollPanel style={{ width: '100%', height: '300px' }} >
+                                            {Transactions.map((transaction) => {
+                                                return (itemTemplate(transaction))
+                                            })}
+                                        </ScrollPanel>
+                                    </div>
+                                    :
+                                    <h2 className="text-primary text-center fw-bold">No Transaction Records</h2>
+                                }
                             </div>
                         </>
                     </div>
