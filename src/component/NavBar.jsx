@@ -5,24 +5,24 @@ import { useSelector } from 'react-redux';
 export const NavBar = () => {
   const loggedIn = useSelector((state) => state.setLog.isLoggedIn);
   const role = useSelector((state) => state.setLog.role);
-  useEffect(() => {
-    const nav = document.querySelector('nav');
-    const sidebar = document.querySelector('.sidebar');
+  // useEffect(() => {
+  //   const nav = document.querySelector('nav');
+  //   const sidebar = document.querySelector('.sidebar');
 
-    const toggleSidebar = () => {
-      sidebar.classList.toggle('toggled');
-      const isToggled = sidebar.classList.contains('toggled');
-      nav.style.transition = isToggled ? 'width 0.5s ease' : 'width 0.5s ease-out';
-    };
+  //   const toggleSidebar = () => {
+  //     sidebar.classList.toggle('toggled');
+  //     const isToggled = sidebar.classList.contains('toggled');
+  //     nav.style.transition = isToggled ? 'width 0.5s ease' : 'width 0.5s ease-out';
+  //   };
 
-    nav.addEventListener('mouseover', toggleSidebar);
-    nav.addEventListener('mouseout', toggleSidebar);
+  //   nav.addEventListener('mouseover', toggleSidebar);
+  //   nav.addEventListener('mouseout', toggleSidebar);
 
-    return () => {
-      nav.removeEventListener('mouseover', toggleSidebar);
-      nav.removeEventListener('mouseout', toggleSidebar);
-    };
-  }, []);
+  //   return () => {
+  //     nav.removeEventListener('mouseover', toggleSidebar);
+  //     nav.removeEventListener('mouseout', toggleSidebar);
+  //   };
+  // }, []);
   return (
     <nav className="navbar p-fixed toggled navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
       <div className="container-fluid d-flex flex-column p-0">
@@ -43,10 +43,12 @@ export const NavBar = () => {
               </>}
             {role === "Student" &&
               <>
+                <NavLink icon="fas fa-user" path="/profile" name="Profile" />
                 <NavLink icon="fas fa-book" path="/books" name="Library" />
                 <NavLink icon="fas fa-book" path="/submit" name="Submit Book" />
-                <NavLink icon="fas fa-table" path="/fine" name="Fine" />
                 <NavLink icon="fas fa-table" path="/transaction" name="Book Requests" />
+              <NavLink icon="fa-solid fa-indian-rupee-sign" path="/fine" name="Fine" />
+              <NavLink icon="fa-regular fa-credit-card" path="/pay-fine" name="Pay Fine" />
               </>}
             {(role === "Admin" || role === "Teacher") &&
               <>

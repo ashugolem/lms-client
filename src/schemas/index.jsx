@@ -24,6 +24,9 @@ export const ChangePasswordSchema = Yup.object({
     password: Yup.string().min(4, "Minimum Length should must be 4").required('Password is required'),
     confirmPassword: Yup.string().label('Confirm password').required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
 })
+export const SubmitBookSchema = Yup.object({
+    book: Yup.string().required('Choose book'),
+})
 
 
 export const AddUserSchema = Yup.object({

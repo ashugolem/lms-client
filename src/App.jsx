@@ -19,6 +19,7 @@ import { CookiesProvider } from 'react-cookie';
 import ProtectedRoute from './ProtectedRoute';
 import Fine from './component/Fine/Fine';
 import BookTransaction from './component/Transactions/BookTransaction';
+import SubmitBook from './component/SubmitBook/SubmitBook';
 
 function App() {
   useEffect(() => {
@@ -57,6 +58,11 @@ function App() {
                 <Route exact path="/profile" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
                     <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route exact path="/submit" element={
+                  <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
+                    <SubmitBook />
                   </ProtectedRoute>
                 } />
                 <Route exact path="/request" element={

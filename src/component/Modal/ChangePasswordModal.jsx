@@ -70,39 +70,43 @@ const ChangePassword = (props) => {
                                 className="shadow"
                                 name="oldPassword"
                                 id="oldPassword"
+                                type='password'
                                 value={values.oldPassword}
                                 placeholder={'Old Password'}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 autoComplete='true'
                             />
-                            <p className="form-error text-danger">{errors.oldPassword}</p>
+
+                            {(errors.oldPassword && touched.oldPassword) ? <p className="form-error text-danger">{errors.oldPassword}</p> : null}
                         </div>
                         <div className="mb-3 mt-3">
                             <InputText
                                 className="shadow"
                                 name="password"
                                 id="password"
+                                type='password'
                                 value={values.password}
                                 placeholder={'Password'}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 autoComplete='true'
                             />
-                            <p className="form-error text-danger">{errors.password}</p>
+                            {(errors.password && touched.password) ? <p className="form-error text-danger">{errors.password}</p> : null}
                         </div>
                         <div className="mb-3 mt-3">
                             <InputText
                                 className="shadow"
                                 name="confirmPassword"
                                 id="confirmPassword"
+                                type='password'
                                 value={values.confirmPassword}
                                 placeholder={'Confirm Password'}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 autoComplete='true'
                             />
-                            <p className="form-error text-danger">{errors.confirmPassword}</p>
+                            {(errors.confirmPassword && touched.confirmPassword) ? <p className="form-error text-danger">{errors.confirmPassword}</p> : null}
                         </div>
 
                         <button

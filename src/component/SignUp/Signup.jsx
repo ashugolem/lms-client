@@ -12,7 +12,6 @@ import Lottie from 'lottie-react';
 import animationData from '../../assets/Loading/Airplane.json';
 import ActivationRequest from '../API/Signup/ActivationRequest';
 import { SignupSchema } from '../../schemas';
-import { Calendar } from 'primereact/calendar';
 import './Responsive.css'
 
 export default function Signup() {
@@ -62,7 +61,6 @@ export default function Signup() {
       initialValues,
       validationSchema: SignupSchema,
       onSubmit: async (values, action) => {
-        console.log(rOTP)
         const signupForm = document.getElementById('signupForm')
         const OTP_form = document.getElementById('OTP_form')
         const value = await CheckUser(values);
@@ -164,7 +162,7 @@ export default function Signup() {
                     {values.role === 'Student' &&
                       <>
                         <div className="mb-3">
-                          <InputText placeholder='Admission No' value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} /> {errors.admissionNo && touched.admissionNo ? (
+                          <InputText placeholder='Admission No' keyfilter="int" value={values.admissionNo} name="admissionNo" minLength="5" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} /> {errors.admissionNo && touched.admissionNo ? (
                             <p className="form-error text-danger">{errors.admissionNo}</p>
                           ) : null}
                         </div>
@@ -181,7 +179,7 @@ export default function Signup() {
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <InputText placeholder='Semester' value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
+                          <InputText placeholder='Semester' keyfilter="int" value={values.semester} name="semester" minLength="1" onBlur={handleBlur} onChange={handleChange} style={{ height: '50px', width: '80%' }} />
                           {errors.semester && touched.semester ? (
                             <p className="form-error text-danger">{errors.semester}</p>
                           ) : null}

@@ -82,13 +82,22 @@ const TopNav = () => {
         }
         fetchEverything()
     }, []);
+    const [menuOpen, setMenuOpen] = useState(false); 
+    const toggleMenu = () => {
+        setMenuOpen((prevMenuOpen) => !prevMenuOpen);
+    };
     if (loggedIn) {
         return (
             <>
                 <Toast ref={toast} />
                 <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div className="container-fluid">
-                        <button className="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                        <button
+                            className="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop"
+                            type="button"
+                            onClick={toggleMenu} // Attach onClick event handler to toggle menu
+                        >
                             <i className="fas fa-bars"></i>
                         </button>
                         <ul className="navbar-nav flex-nowrap ms-auto">
@@ -234,13 +243,28 @@ const TopNav = () => {
                                                     <i className="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                                                     &nbsp;Profile
                                                 </Link>
+                                                <div className="dropdown-divider"></div>
                                                 <Link className="dropdown-item" to={'/books'}>
-                                                    <i className="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>
-                                                    &nbsp;Library
+                                                <i className="fas fa-book fa-sm fa-fw me-2 text-gray-400"></i>
+                                                    &nbsp;Lent Book
                                                 </Link>
+                                                <Link className="dropdown-item" to={'/submit'}>
+                                                <i className="fas fa-book fa-sm fa-fw me-2 text-gray-400"></i>
+                                                    &nbsp;Submit Book
+                                                </Link>
+                                                <div className="dropdown-divider"></div>
                                                 <Link className="dropdown-item" to={'/transaction'}>
                                                     <i className="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>
                                                     &nbsp;Transactions
+                                                </Link>
+                                                <div className="dropdown-divider"></div>
+                                                <Link className="dropdown-item" to={'/transaction'}>
+                                                <i className="fa-solid fa-indian-rupee-sign fa-sm fa-fw me-2 text-gray-400"></i>
+                                                    &nbsp;Fine
+                                                </Link>
+                                                <Link className="dropdown-item" to={'/transaction'}>
+                                                <i className="fa-regular fa-credit-card fa-sm fa-fw me-2 text-gray-400"></i>
+                                                    &nbsp;Pay Fine
                                                 </Link>
                                             </>}
                                         <div className="dropdown-divider"></div>
