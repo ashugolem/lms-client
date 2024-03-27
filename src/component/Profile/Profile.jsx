@@ -78,7 +78,7 @@ const Profile = () => {
                                     <div className="card-body text-center shadow">
                                         {student.profile === null ?
                                             <img className="rounded-circle profile mb-3 mt-4" alt='UserIcon' src={'/img/avatars/defaultContact.png'} width="213" height="213" /> :
-                                            <img className="rounded-circle profile mb-3 mt-4" alt='UserIcon' src={`${student.profile}`} width="213" height="213" />}
+                                            <img className="rounded profile mb-3 mt-4" alt='UserIcon' src={`${student.profile}`} width="213" height="213" />}
                                         <div className="mb-3"><button className="btn btn-primary btn-sm" onClick={handleChangePhoto} type="button">Change Photo</button></div>
                                     </div>
                                 </div>                                
