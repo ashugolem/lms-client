@@ -89,10 +89,10 @@ const Profile = () => {
                                         <h6 className="text-primary fw-bold m-0">Dashboard</h6>
                                     </div>
                                     <div className="card-body">
-                                        <Bar text='Books Lent' value={student.booksLent} />
-                                        <Bar text='Books Submitted' value={student.booksSubmitted} />
-                                        <Bar text='Fine Imposed' value={student.fine} />
-                                        <Bar text='Fine Paid' value={student.finePaid} />
+                                        <Bar text='Books Lent' max={5} value={student.booksLent} />
+                                        <Bar text='Books Submitted' max={5} value={student.booksSubmitted} />
+                                        <Bar text='Fine Imposed' max={500} value={student.fine} />
+                                        <Bar text='Fine Paid' max={500} value={student.finePaid} />
                                     </div>
                                 </div>                             
                             </div>                            
