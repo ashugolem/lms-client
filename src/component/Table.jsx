@@ -25,8 +25,6 @@ function Table() {
     const getBooks = async (start, end) => {
         try {
             setLoading(true)
-            
-            console.log("Calling API with start-", start, "end-", end)
             const response = await fetch(`${import.meta.env.VITE_HOST}/book/${start}/${end}`, {
                 method: 'GET',
                 headers: {
@@ -72,9 +70,6 @@ function Table() {
     const handleLazyLoading = async () => {
         const newStart = end;
         const newEnd = end + lazyLoadingConstant;
-
-        console.log("Lazy Loading Called start-", newStart, "end-", newEnd);
-
         setStart(newStart);
         setEnd(newEnd);
 

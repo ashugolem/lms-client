@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { NavBar } from './component/NavBar';
 import Content from './component/Content';
 import Table from './component/Table';
@@ -20,6 +20,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Fine from './component/Fine/Fine';
 import BookTransaction from './component/Transactions/BookTransaction';
 import SubmitBook from './component/SubmitBook/SubmitBook';
+import Home from './component/Home';
 
 function App() {
   useEffect(() => {
@@ -27,7 +28,7 @@ function App() {
       duration: 1000,
     });
   }, []);
-
+  const navigate = useNavigate()
   return (
     <>
       <ScrollTrigger>
@@ -52,7 +53,7 @@ function App() {
                 } />
                 <Route exact path="/" element={
                   <ProtectedRoute roles={['Admin', 'Teacher', 'Student']}>
-                    <Table />
+                    <Home />
                   </ProtectedRoute>
                 } />
                 <Route exact path="/profile" element={
