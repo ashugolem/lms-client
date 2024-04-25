@@ -5,7 +5,9 @@
     justify-content: center;
     align-items: center;
 }
-
+/* body, .content{
+  background-color: white!important;
+} */
 
 
 @media only screen and (max-width: 1922px) {
@@ -20,33 +22,59 @@
     .display-6{
         font-size: 40px;
     }
-    .col-md-8{
-        display: none;
+    .res-1200 .responsive {
+      display: none!important;
     }
-    .col-md-4{
-        width: 100%;
+    .res-922{
+      width: 100%;
     }
-     #signupForm {
-        width: 100%;
+    .res-1200{
+      flex-direction: row!important;
     }
 }
 @media only screen and (min-width: 922px) and (max-width: 1199px) {
-  .responsive img{
-    margin-top: -20%;
-    width: 650px!important;
-    height: 650px!important;
+  .responsive {
+    margin-top: 0;
+    width: 50%!important;
+  }
+  .responsive img {
+    /* margin-top: -8rem; */
+    width: 100%!important;
   }
    #signupForm {
         width: 100%;
     }
 }
+@media only screen and (max-width: 600px) {
+  body{
+    overflow: hidden;
+  }
+  .form{
+    width: 100%!important;
+  }
+  .res-1200, .res-922{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 100vw!important;
+  }
+  .res-600{
+    width: 100%!important;
+  }
+  .bottom-headline{
+    margin-top: 11rem;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .bottom-headline{
+    margin-top: 0!important;
+  }
+}
 @media only screen and (min-width: 1200px) {
   .responsive img{
-    margin-top: -20%;
+    /* margin-top: -20%; */
     width: 650px!important;
     height: 650px!important;
   }
-   #signupForm {
-        width: 100%;
-    }
 }

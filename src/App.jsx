@@ -28,7 +28,6 @@ function App() {
       duration: 1000,
     });
   }, []);
-  const navigate = useNavigate()
   return (
     <>
       <ScrollTrigger>
