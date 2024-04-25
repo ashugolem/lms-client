@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLoggedIn, setUserName, setRole } from '../Action/index';
 import Decode from '../JWT/Decode';
 import { LoginSchema } from '../../schemas';
@@ -116,7 +116,7 @@ const LoginForm = (props) => {
             </div>
             <button className="button-submit" type='submit'>Sign In</button>
             <p className="p">
-                Don't have an account? <span className="span">Sign Up</span>
+                Don't have an account?<Link to={'/register'}> <span className="span text-primary">Sign Up</span></Link>
             </p>
             <span className="form-error text-muted text-start">Admin Email : singh.asishhhh@gmail.com</span>
             <span className="form-error text-muted text-start">Password : 123456</span>
