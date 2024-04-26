@@ -45,8 +45,6 @@ export default function Signup() {
         showError("User already exists! Please Login")
       } else if (value === 'not-exists') {
         setLoading(true)
-        console.log(rOTP)
-        debugger
         await sendEmail(rOTP, values.email)
         showSuccess(`OTP has been successfully sent to ${values.email}`)
         setLoading(false)
