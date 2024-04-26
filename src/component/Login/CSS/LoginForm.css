@@ -71,7 +71,7 @@
 
 .button-submit {
   margin: 20px 0 10px 0;
-  background-color: #5300a7;
+  background-color: #5400a7e9;
   border: none;
   color: white;
   font-size: 15px;
@@ -83,7 +83,7 @@
 }
 
 .button-submit:hover {
-  background-color: #252727;
+  background-color: #5300a7;
 }
 
 .p {

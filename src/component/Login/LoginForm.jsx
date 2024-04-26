@@ -54,11 +54,11 @@ const LoginForm = (props) => {
                     <br />
                 </span>
             </h2>
-            <div className="flex-column">
+            <div className="flex-column text-start">
                 <label>Email </label>
             </div>
             <div className="inputForm">
-                <i className="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope mt-1"></i>
                 <input
                     type="text"
                     className="input"
@@ -74,7 +74,7 @@ const LoginForm = (props) => {
                 <p className="form-error text-start text-danger">{errors.email}</p>
             ) : null}
 
-            <div className="flex-column">
+            <div className="flex-column text-start">
                 <label>Password </label>
             </div>
             <div className="inputForm">

@@ -5,6 +5,8 @@ import animationData from '../../assets/Loading/Airplane.json'
 import TopNav from '../TopNav/TopNav';
 import moment from 'moment/moment';
 import { ScrollPanel } from 'primereact/scrollpanel';
+
+
 export default function BookTransaction() {
 
     const [Transactions, setTransactions] = useState([]); // Array to store the transactions made by the user
@@ -28,7 +30,7 @@ export default function BookTransaction() {
 
     useEffect(() => {
         getTransactions();
-    }, []); // Empty dependency array means this effect will run only once when the component mounts
+    }, []);
 
     const itemTemplate = (transaction) => {
         return (
@@ -49,7 +51,6 @@ export default function BookTransaction() {
                 </div>
                 :
                 <div className="flex align-items-center text-end gap-2 w-100">
-                    {/* <i className="fa-solid fa-calendar-days text-sm "></i> */}
                     <span className='px-2 text-warning'>Request sent to Admin</span>
                 </div>
 
@@ -88,7 +89,7 @@ export default function BookTransaction() {
                                     ?
                                     <div className="card xl:flex xl:justify-content-center">
                                         {/* <OrderList dataKey="id" value={Transactions} onChange={(e) => setTransactions(e.value)} itemTemplate={itemTemplate} header="Book Transactions"></OrderList> */}
-                                        <ScrollPanel style={{ width: '100%', height: '300px' }} >
+                                        <ScrollPanel style={{ width: '100%', height: '100%' }} >
                                             {Transactions.map((transaction) => {
                                                 return (itemTemplate(transaction))
                                             })}

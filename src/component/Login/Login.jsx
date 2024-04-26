@@ -41,27 +41,37 @@ function Login() {
         :
         <div className="d-flex flex-column" id="content-wrapper">
           <div id="content">
-            <section className="py-md-5" >
-              <div className="container  res-1200">
-                <div className="row justify-content-between res-600">
-                  <div className="col-md-8 text-center d-flex responsive align-items-center">
-                    <LazyLoadImage
-                      className="img-fluid w-100 responsive"
-                      src="/img/illustrations/login.png"
-                      alt="Login Illustration"
-                      effect='blur'
-                      loading='lazy'
-                      placeholderSrc='/img/illustrations/login_placeholder.png'
-                    />
-                  </div>
-                  <div className="col-md-6 text-center res-922 text-md-start ">                   
-                    <LoginForm setLoading={setLoading} showError={showError} />
+            <div className="login-bg d-flex align-items-center justify-content-center">
+              <section className="py-md-5" >
+                <div className="container res-1200">
+                  <div className="row res-600">
+                    <div className="col-md-8  text-center d-flex responsive align-items-center">
+                      <div className="row">
+                        <div className="col-md-2 w-100 mt-2">
+                          <h1 className="text-center heading fw-bold">Smart Library</h1>
+                        </div>
+                        <div className="col-md-11 login-img">
+                          <LazyLoadImage
+                            className="img-fluid w-100 responsive"
+                            src="/img/illustrations/login.png"
+                            alt="Login Illustration"
+                            effect='blur'
+                            loading='lazy'
+                            placeholderSrc='/img/illustrations/login_placeholder.png'
+                          />
+                        </div>
+                      </div>
+                      {/* <label className='heading'>Library Management System</label> */}
+                    </div>
+                    <div className="col-md-6 bg-white loginForm d-flex align-items-center justify-content-center  text-center res-922 text-md-start right-0">
+                      <LoginForm setLoading={setLoading} showError={showError} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
-            <div className='bottom-headline'>
-              <NotSure heading="Facing error?" description="Contact - support@edusync.com" />
+              </section>
+              {/* <div className='bottom-headline'>
+                <NotSure heading="Facing error?" description="Contact - support@edusync.com" />
+              </div> */}
             </div>
           </div>
         </div>}
